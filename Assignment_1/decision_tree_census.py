@@ -1,6 +1,7 @@
 from Assignment_1.prep_census_data import get_census_data_and_labels
 from Assignment_1.mnist_data_prep import get_mnist_data_labels
-from sklearn import preprocessing, tree
+from sklearn import tree
+from sklearn.model_selection import cross_val_score
 import matplotlib.pyplot as plt
 import os
 
@@ -27,9 +28,10 @@ def get_decision_tree_pruning_scores(train_data, train_lables, test_data, test_l
         print(f"{alpha:0.5f}:{score:0.4f}")
 
 
-def get_decision_tree_pruning_curve(train_data, train_labels, test_data, test_labels):
-
-    decision_tree = tree.DecisionTreeClassifier()
+def get_decision_tree_pruning_curve(
+    train_data, train_labels, test_data, test_labels, criterion="gini", random_state=0
+):
+    decision_tree = tree.DecisionTreeClassifier(criterion=criterion, random_state=random_state)
     ccp_path = decision_tree.cost_complexity_pruning_path(train_data, train_labels)
     all_alphas = ccp_path["ccp_alphas"]
     # Sample Alphas
@@ -42,7 +44,7 @@ def get_decision_tree_pruning_curve(train_data, train_labels, test_data, test_la
 
     print(f"{'alpha':9} {'score':9} {'N_cnt':5} {'M_dpt':5} ")
     for alpha in alphas:
-        dt = tree.DecisionTreeClassifier(ccp_alpha=alpha)
+        dt = tree.DecisionTreeClassifier(ccp_alpha=alpha, random_state=random_state)
         dt.fit(train_data, train_labels)
         score = dt.score(test_data, test_labels)
         node_count = dt.tree_.node_count
@@ -53,6 +55,45 @@ def get_decision_tree_pruning_curve(train_data, train_labels, test_data, test_la
         print(f"{alpha:0.7f} {score:0.5f} {node_count:5} {max_depth:5} ")
 
     return alphas, alpha_scores, alpha_node_count, alpha_max_depth
+
+
+def get_decision_tree_pruning_curve_with_cross_validation(
+    train_data, train_labels, test_data, test_labels, criterion="gini", cross_validations=5, random_state=0
+):
+    decision_tree = tree.DecisionTreeClassifier(criterion=criterion, random_state=random_state)
+    ccp_path = decision_tree.cost_complexity_pruning_path(train_data, train_labels)
+    all_alphas = ccp_path["ccp_alphas"]
+    # Sample Alphas
+    alpha_count = len(all_alphas)
+    alpha_increment = int(alpha_count / 50)
+    alphas = [all_alphas[i] for i in range(0, alpha_count, alpha_increment)]
+    alpha_test_scores = []
+    alpha_train_scores = []
+    alpha_node_count = []
+    alpha_max_depth = []
+
+    cross_validation_scores = []
+
+    print(f"{'alpha':9} {'score':9} {'N_cnt':5} {'M_dpt':5} {'Train':7} {'CV':7}")
+    for alpha in alphas:
+        dt = tree.DecisionTreeClassifier(ccp_alpha=alpha, random_state=random_state)
+        dt.fit(train_data, train_labels)
+        score = dt.score(test_data, test_labels)
+        train_score = dt.score(train_data, train_labels)
+        alpha_train_scores.append(train_score)
+
+        node_count = dt.tree_.node_count
+        max_depth = dt.tree_.max_depth
+        alpha_test_scores.append(score)
+        alpha_node_count.append(node_count)
+        alpha_max_depth.append(max_depth)
+
+        dt = tree.DecisionTreeClassifier(ccp_alpha=alpha, random_state=random_state)
+        cv_score = cross_val_score(dt, train_data, train_labels, cv=cross_validations).mean()
+        cross_validation_scores.append(cv_score)
+        print(f"{alpha:0.7f} {score:0.5f} {node_count:5} {max_depth:5} {train_score:0.5f} {cv_score:0.5f}")
+
+    return alphas, alpha_test_scores, alpha_node_count, alpha_max_depth, alpha_train_scores, cross_validation_scores
 
 
 def plot_alpha_curve(alphas, alpha_scores, alpha_node_count, alpha_max_depth, title, xscale="linear", nodes_to_trim=3):
@@ -104,6 +145,17 @@ alphas, alpha_scores, alpha_node_count, alpha_max_depth = get_decision_tree_prun
     df_data_numeric, df_label_numeric, df_test_data_numeric, df_test_label_numeric
 )
 
+(
+    alphas,
+    alpha_scores,
+    alpha_node_count,
+    alpha_max_depth,
+    alpha_train_scores,
+    cross_validation_scores,
+) = get_decision_tree_pruning_curve_with_cross_validation(
+    df_data_numeric, df_label_numeric, df_test_data_numeric, df_test_label_numeric
+)
+
 plot_alpha_curve(alphas, alpha_scores, alpha_node_count, alpha_max_depth, "Census Data", xscale="log", nodes_to_trim=3)
 
 print(f"Max Cencus Accuracy:{max(alpha_scores)}")
@@ -112,6 +164,17 @@ print(f"Max Cencus Accuracy:{max(alpha_scores)}")
 train_images_flattened, train_labels, test_images_flattened, test_labels = get_mnist_data_labels()
 
 alphas_image, alpha_scores_image, alpha_node_count_image, alpha_max_depth_image = get_decision_tree_pruning_curve(
+    train_images_flattened, train_labels, test_images_flattened, test_labels, criterion="entropy"
+)
+
+(
+    alphas_image,
+    alpha_scores_image,
+    alpha_node_count_image,
+    alpha_max_depth_image,
+    alpha_train_scores_image,
+    cross_validation_scores_image,
+) = get_decision_tree_pruning_curve_with_cross_validation(
     train_images_flattened, train_labels, test_images_flattened, test_labels
 )
 
