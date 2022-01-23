@@ -2,6 +2,11 @@ from Assignment_1.prep_census_data import get_census_data_and_labels
 from Assignment_1.mnist_data_prep import get_mnist_data_labels
 from sklearn import preprocessing, tree
 import matplotlib.pyplot as plt
+import os
+
+
+def title_to_filename(title, classifier_type):
+    return f"Assignment_1/document/figures/{title.replace(' ','_')}_{classifier_type}.png"
 
 
 def get_decision_tree_pruning_scores(train_data, train_lables, test_data, test_labels, max_depth):
@@ -35,11 +40,8 @@ def get_decision_tree_pruning_curve(train_data, train_labels, test_data, test_la
     alpha_node_count = []
     alpha_max_depth = []
 
-    max_score = 0
-    declining_score_count = 0
-    max_declining = 15
-    print(f"{'alpha':9} {'score':9} {'N_cnt':5} {'M_dpt':5} {'Decline':7}")
-    for index, alpha in enumerate(alphas):
+    print(f"{'alpha':9} {'score':9} {'N_cnt':5} {'M_dpt':5} ")
+    for alpha in alphas:
         dt = tree.DecisionTreeClassifier(ccp_alpha=alpha)
         dt.fit(train_data, train_labels)
         score = dt.score(test_data, test_labels)
@@ -48,34 +50,40 @@ def get_decision_tree_pruning_curve(train_data, train_labels, test_data, test_la
         alpha_scores.append(score)
         alpha_node_count.append(node_count)
         alpha_max_depth.append(max_depth)
-        print(f"{alpha:0.7f} {score:0.5f} {node_count:5} {max_depth:5} {declining_score_count:7}")
+        print(f"{alpha:0.7f} {score:0.5f} {node_count:5} {max_depth:5} ")
 
     return alphas, alpha_scores, alpha_node_count, alpha_max_depth
 
 
-def plot_alpha_curve(alphas, alpha_scores, alpha_node_count, alpha_max_depth):
-    start_node = 3
-    fig, ax = plt.subplots(2, figsize=(3, 6))
-    fig.suptitle("Decision Tree", fontsize=16)
-    ax[0].set_title("Alpha vs Test Score")
-    ax[0].plot(alphas[start_node:], alpha_scores[start_node:], color="blue")
+def plot_alpha_curve(alphas, alpha_scores, alpha_node_count, alpha_max_depth, title, xscale="linear", nodes_to_trim=3):
+    fig, ax = plt.subplots(2, figsize=(4, 5))
+    fig.suptitle(title, fontsize=16)
+    ax[0].set_title("Accuracy")
+    ax[0].plot(alphas[nodes_to_trim:], alpha_scores[nodes_to_trim:])
     ax[0].set_xlabel("Alpha")
-    ax[0].set_xscale("log")
-    ax[0].set_ylabel("Test Score", color="blue")
-    ax[0].tick_params(axis="y", labelcolor="blue")
+    ax[0].set_xscale(xscale)
+    ax[0].invert_xaxis()
+    ax[0].set_ylabel("Test Score")
+    ax[0].autoscale_view("tight")
 
-    ax[1].set_title("Max Depth and Node Count")
-    ax[1].plot(alphas[start_node:], alpha_max_depth[start_node:])
+    ax[1].set_title("Tree Size")
+    ax[1].plot(alphas[nodes_to_trim:], alpha_max_depth[nodes_to_trim:], color="blue")
     ax[1].set_xlabel("Alpha")
-    ax[1].set_ylabel("Max Depth")
-    ax[1].set_xscale("log")
+    ax[1].set_ylabel("Max Depth", color="blue")
+    ax[1].tick_params(axis="y", labelcolor="blue")
+    ax[1].set_xscale(xscale)
+    ax[1].invert_xaxis()
+    ax[1].autoscale_view("tight")
     ax2 = ax[1].twinx()
-    ax2.plot(alphas[start_node:], alpha_node_count[start_node:], color="red")
+    ax2.plot(alphas[nodes_to_trim:], alpha_node_count[nodes_to_trim:], color="red")
     ax2.set_ylabel("Node Count", color="red")
     ax2.tick_params(axis="y", labelcolor="red")
 
+    filename = title_to_filename(title, "decision_tree")
+    if os.path.exists(filename):
+        os.remove(filename)
     fig.tight_layout()
-    plt.show()
+    plt.savefig(fname=filename, bbox_inches="tight")
 
 
 # Census Data
@@ -96,7 +104,9 @@ alphas, alpha_scores, alpha_node_count, alpha_max_depth = get_decision_tree_prun
     df_data_numeric, df_label_numeric, df_test_data_numeric, df_test_label_numeric
 )
 
-plot_alpha_curve(alphas, alpha_scores, alpha_node_count, alpha_max_depth)
+plot_alpha_curve(alphas, alpha_scores, alpha_node_count, alpha_max_depth, "Census Data", xscale="log", nodes_to_trim=3)
+
+print(f"Max Cencus Accuracy:{max(alpha_scores)}")
 
 # Image Data
 train_images_flattened, train_labels, test_images_flattened, test_labels = get_mnist_data_labels()
@@ -105,4 +115,14 @@ alphas_image, alpha_scores_image, alpha_node_count_image, alpha_max_depth_image 
     train_images_flattened, train_labels, test_images_flattened, test_labels
 )
 
-plot_alpha_curve(alphas_image, alpha_scores_image, alpha_node_count_image, alpha_max_depth_image)
+plot_alpha_curve(
+    alphas_image,
+    alpha_scores_image,
+    alpha_node_count_image,
+    alpha_max_depth_image,
+    "MNIST Images",
+    xscale="log",
+    nodes_to_trim=0,
+)
+
+print(f"Max MNIST Accuracy:{max(alpha_scores_image)}")

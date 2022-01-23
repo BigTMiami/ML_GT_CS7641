@@ -132,8 +132,27 @@ Decision Trees. For the decision tree, you should implement or steal a decision 
 
 I used the DecisionTreeClassifier algorithm from the sklearn library.  This has several distinct aspects.  First it only accepts numeric data for features and treats all features as continuous.  Because of this, a feature can appear in multiple nodes within the same path, with different thresholds.  It also means this is a binary tree, with each node having only two edges.  Other decision tree implementations might allow for discreet features, meaning a feature could only appear once in any tree path and the tree might not be binary.
 
-The 
+\begin{figure}[htb]
+\centering
+\includegraphics[width=2.75in]{figures/Census_Data_decision_tree.png}
+\caption{Census Data Decision Tree:  The right side of the upper chart shows overfitting as the pruning is reduced and the number of nodes and tree depth increases.  An unusual aspect is the left side of the chart shows very high accuracy with very few nodes.  This stems from one feature being highly correlated to the labeled output.}
+\label{fig:census_data_decision_tree}
+\end{figure}
 
+To prune the tree, sklearn uses a minimal cost-complexity setting.  Each node in a tree has an $\alpha$ value which measures the node misclassifications minus leaves misclassifications divided by the number of leaf nodes.  The DecisionTreeClassifier then takes an $\alpha$ minimum setting, pruning all subtrees with a lower $\alpha$.   For both datasets, an accuracy curve was created by fitting the tree with different $\alpha$ values.
+
+
+The Census Data, shown in Figure \ref{fig:census_data_decision_tree},  mostly shows the expected curve.  Accuracy improves as nodes are added, to a point, then accuracy declines due to over fitting as more nodes are added.  Alpha, the pruning constant, leaves more nodes in the tree as it is decreased.  The Census Data also showed a unique characteristic.  One of its features (Capital Losses), showed a very high correlation with the labeled output, Income above \$50k.  Thus, a one node tree already showed 94\% accuracy.  Figure \ref{fig:census_data_decision_tree} shows this, with the the left side of the chart with few nodes already having a very high accuracy.  Overall, the highest accuracy achieved was 95.3\%. 
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=2.75in]{figures/MNIST_Images_decision_tree.png}
+\caption{MNIST Images Decision Tree:  The left side of the chart shows rapidly growing accuracy as nodes are added, eventually reaching a peak accuracy.  The right side then shows overfitting with declining accuracy as less pruning increases the number of nodes and tree depth.  }
+\label{fig:MNIST_Images_decision_tree}
+\end{figure}
+
+The MNIST image data, shown in Figure \ref{fig:MNIST_Images_decision_tree}, showed a more normal accuracy curve, with accuracy improving dramatically with added nodes until a maximum accuracy was reached, then accuracy declines due to over fitting.  The maximum accuracy achieved was 88.7\%, which was significantly below the census data.  A decision tree is looking at one pixel at a time, 
+so small variations in position or size would be very challenging for this algorithm.  I think other classifiers, especially the neural network to better handle image data. 
 
 
 \section{References}
