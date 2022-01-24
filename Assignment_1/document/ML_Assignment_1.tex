@@ -130,29 +130,56 @@ The second data set is The MNIST Database of Handwritten Digits [2].  This consi
 \section{Decision Trees}
 Decision Trees. For the decision tree, you should implement or steal a decision tree algorithm (and by "implement or steal" I mean "steal"). Be sure to use some form of pruning. You are not required to use information gain (for example, there is something called the GINI index that is sometimes used) to split attributes, but you should describe whatever it is that you do use.
 
-I used the DecisionTreeClassifier algorithm from the sklearn library.  By default, this uses a GINI index to split the data.  It was possible to use an information gain entropy for splitting, but this did not make a meaningful difference in results for this dataset.  A key aspect of sklearn is that it only accepts numeric data for features and treats all features as continuous.  Because of this, a feature can appear in multiple nodes within the same path, with different thresholds.  It also means this is a binary tree, with each node having only two edges.  Other decision tree implementations might allow for discreet features, meaning a feature could only appear once in any tree path and the tree might not be binary.
+I used the DecisionTreeClassifier algorithm from the sklearn library.  By default, this uses a GINI index to split the data.  It was possible to use an information gain entropy for splitting, but this did not make a meaningful difference in results for the datasets so the GINI index was used.  A key aspect of sklearn is that it only accepts numeric data for features and treats all features as continuous.  Because of this, a feature can appear in multiple nodes within the same path, with different thresholds.  It also means this is a binary tree, with each node having only two edges.  Other decision tree implementations might allow for discreet features, meaning a feature could only appear once in any tree path and the tree might not be binary.  
+
+sklearn also uses a randomizing element, which means that given the same set of data, it may produce different results each run.  In order to produce consistent, repeatable results, the random state setting was set to a fixed value to produce the same results each time.
+
+I also used the sklearn Cross Validation module for estimating the best solution without using the test data.  This was then confirmed by reviewing the test data.
 
 \begin{figure}[htb]
 \centering
-\includegraphics[width=2.75in]{figures/Census_Data_decision_tree.png}
+\includegraphics[width=2.75in]{figures/Census_Data_decision_tree_cross_validation.png}
+\caption{Census Data Cross Validation.  The cross validation error starts to rise as the decision tree starts to over fit.  The best cross validation $\alpha$ value of 0.0000153 had a test accuracy of 95.24\%, which was very close to the actual best testing score of 95.30\%. }
+\label{fig:census_data_decision_tree_cross_validation}
+\end{figure}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=2.75in, height=4in]{figures/Census_Data_decision_tree.png}
 \caption{Census Data Decision Tree:  The right side of the upper chart shows overfitting as the pruning is reduced and the number of nodes and tree depth increases.  An unusual aspect is the left side of the chart shows very high accuracy with very few nodes.  This stems from one feature being highly correlated to the labeled output.}
 \label{fig:census_data_decision_tree}
 \end{figure}
 
-To prune the tree, sklearn uses a minimal cost-complexity setting.  Each node in a tree has an $\alpha$ value which measures the node misclassifications minus leaves misclassifications divided by the number of leaf nodes.  The DecisionTreeClassifier then takes an $\alpha$ minimum setting, pruning all subtrees with a lower $\alpha$.   For both datasets, an accuracy curve was created by fitting the tree with different $\alpha$ values.
 
+To prune the tree, sklearn uses a minimal cost-complexity setting.  Each node in a tree has an $\alpha$ value which measures the node misclassifications minus leaves misclassifications divided by the number of leaf nodes.  The DecisionTreeClassifier then takes an $\alpha$ minimum setting, pruning all subtrees with a lower $\alpha$.   For both datasets, an accuracy curve was created by fitting the tree with different $\alpha$ values.  
 
-The Census Data, shown in Figure \ref{fig:census_data_decision_tree},  mostly shows the expected curve.  Accuracy improves as nodes are added, to a point, then accuracy declines due to over fitting as more nodes are added.  Alpha, the pruning constant, leaves more nodes in the tree as it is decreased.  The Census Data also showed a unique characteristic.  One of its features (Capital Losses), showed a very high correlation with the labeled output, Income above \$50k.  Thus, a one node tree already showed 94\% accuracy.  Figure \ref{fig:census_data_decision_tree} shows this, with the the left side of the chart with few nodes already having a very high accuracy.  Overall, the highest accuracy achieved was 95.3\%. 
+For both data sets, I also performed cross validation to use the training set only to determine the best $\alpha$ parameter, with a 5 fold setting (80\% of training data used for training, 20\% used for validation).  I would then use the test data at different $\alpha$ values to confirm the finding.
+
+For the Census Data, Figure \ref{fig:census_data_decision_tree_cross_validation} shows the use of cross validation to estimate the best solution, in this case setting for $\alpha$, without using the test data.   The best cross validation $\alpha$ value of 0.0000153 had a test accuracy of 95.24\%, which was very close to the actual best testing score of 95.30\%.  Cross Validation provides a powerful tool for evaluation a given training set without reference to test data when available.
+
+The Census Data, shown in Figure \ref{fig:census_data_decision_tree},  mostly shows the expected curve.  Accuracy improves as nodes are added, to a point, then accuracy declines due to over fitting as more nodes are added.  Alpha, the pruning constant, leaves more nodes in the tree as it is decreased.  The Census Data also showed a unique characteristic.  One of its features (Capital Losses), showed a very high correlation with the labeled output, Income above \$50k.  Thus, a one node tree already showed 94\% accuracy.  Figure \ref{fig:census_data_decision_tree} shows this, with the the left side of the chart with few nodes already having a very high accuracy.  
+
 
 \begin{figure}[htb]
 \centering
-\includegraphics[width=2.75in]{figures/MNIST_Images_decision_tree.png}
+\includegraphics[width=2.75in]{figures/MNIST_Images_decision_tree_cross_validation.png}
+\caption{MNIST Images Cross Validation Error:  The chart shows continual reduction in training error, while the Cross Validation error reaches a minimum at an $\alpha$ of 0.0000542 and then starts to rise.  This was very close to the best $\alpha$ found using the testing data. }
+\label{fig:MNIST_Images_decision_tree_cross_validation}
+\end{figure}
+
+Figure \ref{fig:MNIST_Images_decision_tree_cross_validation}  shows the cross validation error curves for the MNIST image data.  The best cross validation $\alpha$ value of 0.0000762 had a test accuracy of 87.18\%,  while the actual best testing score of 88.54\%.  This was a larger gap than found in the Census data, but still relatively close.
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=2.75in, height=4in]{figures/MNIST_Images_decision_tree.png}
 \caption{MNIST Images Decision Tree:  The left side of the chart shows rapidly growing accuracy as nodes are added, eventually reaching a peak accuracy.  The right side then shows overfitting with declining accuracy as less pruning increases the number of nodes and tree depth.  }
 \label{fig:MNIST_Images_decision_tree}
 \end{figure}
 
-The MNIST image data, shown in Figure \ref{fig:MNIST_Images_decision_tree}, showed a more normal accuracy curve, with accuracy improving dramatically with added nodes until a maximum accuracy was reached, then accuracy declines due to over fitting.  The maximum accuracy achieved was 88.7\%, which was significantly below the census data.  A decision tree is looking at one pixel at a time, 
+The MNIST image data, shown in Figure \ref{fig:MNIST_Images_decision_tree}, showed a more normal accuracy curve than the Census Data, with accuracy improving dramatically with added nodes until a maximum accuracy was reached, then accuracy declines due to over fitting.  The maximum accuracy achieved was 88.7\%, which was significantly below the census data.  A decision tree is looking at one pixel at a time, 
 so small variations in position or size would be very challenging for this algorithm.  I think other classifiers, especially the neural network to better handle image data. 
+
+
 
 
 \section{References}

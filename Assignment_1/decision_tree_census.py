@@ -115,12 +115,89 @@ def plot_alpha_curve(alphas, alpha_scores, alpha_node_count, alpha_max_depth, ti
     ax[1].set_xscale(xscale)
     ax[1].invert_xaxis()
     ax[1].autoscale_view("tight")
-    ax2 = ax[1].twinx()
-    ax2.plot(alphas[nodes_to_trim:], alpha_node_count[nodes_to_trim:], color="red")
-    ax2.set_ylabel("Node Count", color="red")
-    ax2.tick_params(axis="y", labelcolor="red")
+    ax_1 = ax[1].twinx()
+    ax_1.plot(alphas[nodes_to_trim:], alpha_node_count[nodes_to_trim:], color="red")
+    ax_1.set_ylabel("Node Count", color="red")
+    ax_1.tick_params(axis="y", labelcolor="red")
 
     filename = title_to_filename(title, "decision_tree")
+    if os.path.exists(filename):
+        os.remove(filename)
+    fig.tight_layout()
+    plt.savefig(fname=filename, bbox_inches="tight")
+
+
+def plot_alpha_curve_with_cross_validation(
+    alphas,
+    alpha_scores,
+    alpha_node_count,
+    alpha_max_depth,
+    training_scores,
+    cross_validation_scores,
+    title,
+    xscale="linear",
+    nodes_to_trim=3,
+):
+    fig, ax = plt.subplots(2, figsize=(4, 7.5))
+    fig.suptitle(title, fontsize=16)
+    ax[0].set_title("Accuracy")
+    ax[0].plot(alphas[nodes_to_trim:], alpha_scores[nodes_to_trim:])
+    ax[0].set_xlabel("Alpha")
+    ax[0].set_xscale(xscale)
+    ax[0].invert_xaxis()
+    ax[0].set_ylabel("Test Score")
+    ax[0].autoscale_view("tight")
+
+    ax[1].set_title("Tree Size")
+    ax[1].plot(alphas[nodes_to_trim:], alpha_max_depth[nodes_to_trim:], color="blue")
+    ax[1].set_xlabel("Alpha")
+    ax[1].set_ylabel("Max Depth", color="blue")
+    ax[1].tick_params(axis="y", labelcolor="blue")
+    ax[1].set_xscale(xscale)
+    ax[1].invert_xaxis()
+    ax[1].autoscale_view("tight")
+    ax_1 = ax[1].twinx()
+    ax_1.plot(alphas[nodes_to_trim:], alpha_node_count[nodes_to_trim:], color="red")
+    ax_1.set_ylabel("Node Count", color="red")
+    ax_1.tick_params(axis="y", labelcolor="red")
+
+    filename = title_to_filename(title, "decision_tree")
+    if os.path.exists(filename):
+        os.remove(filename)
+    fig.tight_layout()
+    plt.savefig(fname=filename, bbox_inches="tight")
+
+    # Change Scores to error
+    training_error = [1.0 - score for score in training_scores]
+    cross_validation_error = [1.0 - score for score in cross_validation_scores]
+
+    # Get Best Testing Values
+    best_test_index = alpha_scores.index(max(alpha_scores))
+    print(
+        f"Best Test  Alpha:{alphas[best_test_index]:0.7f} Score:{alpha_scores[best_test_index]:0.4f} Nodes:{alpha_node_count[best_test_index]:,} Depth:{alpha_max_depth[best_test_index]}"
+    )
+
+    best_cv_index = cross_validation_scores.index(max(cross_validation_scores))
+    print(
+        f"Best Cross Validation Alpha:{alphas[best_cv_index]:0.7f} Score:{cross_validation_scores[best_cv_index]:0.4f} Nodes:{alpha_node_count[best_cv_index]:,} Depth:{alpha_max_depth[best_cv_index]}"
+    )
+
+    fig, ax = plt.subplots(1, figsize=(4, 2.5))
+    fig.suptitle(title, fontsize=16)
+    ax.set_title("Cross Validation Error")
+    ax.plot(alphas[nodes_to_trim:], training_error[nodes_to_trim:], color="blue")
+    ax.set_xlabel("Alpha")
+    ax.set_ylabel("Training Error", color="blue")
+    ax.tick_params(axis="y", labelcolor="blue")
+    ax.set_xscale(xscale)
+    ax.invert_xaxis()
+    ax.autoscale_view("tight")
+    ax_2 = ax.twinx()
+    ax_2.plot(alphas[nodes_to_trim:], cross_validation_error[nodes_to_trim:], color="red")
+    ax_2.set_ylabel("Cross Validation Error", color="red")
+    ax_2.tick_params(axis="y", labelcolor="red")
+
+    filename = title_to_filename(title, "decision_tree_cross_validation")
     if os.path.exists(filename):
         os.remove(filename)
     fig.tight_layout()
@@ -158,6 +235,18 @@ alphas, alpha_scores, alpha_node_count, alpha_max_depth = get_decision_tree_prun
 
 plot_alpha_curve(alphas, alpha_scores, alpha_node_count, alpha_max_depth, "Census Data", xscale="log", nodes_to_trim=3)
 
+plot_alpha_curve_with_cross_validation(
+    alphas,
+    alpha_scores,
+    alpha_node_count,
+    alpha_max_depth,
+    alpha_train_scores,
+    cross_validation_scores,
+    "Census Data",
+    xscale="log",
+    nodes_to_trim=3,
+)
+
 print(f"Max Cencus Accuracy:{max(alpha_scores)}")
 
 # Image Data
@@ -183,6 +272,18 @@ plot_alpha_curve(
     alpha_scores_image,
     alpha_node_count_image,
     alpha_max_depth_image,
+    "MNIST Images",
+    xscale="log",
+    nodes_to_trim=0,
+)
+
+plot_alpha_curve_with_cross_validation(
+    alphas_image,
+    alpha_scores_image,
+    alpha_node_count_image,
+    alpha_max_depth_image,
+    alpha_train_scores_image,
+    cross_validation_scores_image,
     "MNIST Images",
     xscale="log",
     nodes_to_trim=0,
