@@ -1,5 +1,6 @@
 import pandas as pd
 from sklearn.preprocessing import LabelEncoder
+import numpy as np
 
 
 def get_column_names():
@@ -75,7 +76,8 @@ def create_data_and_label_dataframes(df, encode_columns, le):
     df_label = df["label"]
 
     df_data_numeric = df_numeric.drop(columns=["instance weight", "label"])
-    df_label_numeric = df_numeric["label"]
+    df_label_numeric = df["label"].to_frame(name="label")
+    df_label_numeric["label"] = np.where(df_label == " - 50000.", 0, 1)
 
     return df_data, df_label, df_data_numeric, df_label_numeric
 

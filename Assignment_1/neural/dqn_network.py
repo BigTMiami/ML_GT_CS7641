@@ -1,7 +1,6 @@
 import torch as t
+import numpy as np
 
-LEARNING_RATE = 0.01
-LAYER_1_SIZE = 40
 INPUT_COUNT = 40
 ACTION_COUNT = 1
 
@@ -9,8 +8,8 @@ ACTION_COUNT = 1
 class DQN(t.nn.Module):
     def __init__(self, **kwargs):
         super(DQN, self).__init__()
-        self.network_learning_rate = LEARNING_RATE
-        self.layer_1_count = LAYER_1_SIZE
+        self.network_learning_rate = kwargs["network_learning_rate"]
+        self.layer_1_count = kwargs["layer_one_size"]
 
         # Set up layers
         self.l1 = t.nn.Linear(INPUT_COUNT, self.layer_1_count)
