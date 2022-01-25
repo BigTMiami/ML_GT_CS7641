@@ -14,6 +14,8 @@ class DQN(t.nn.Module):
         # Set up layers
         self.l1 = t.nn.Linear(INPUT_COUNT, self.layer_1_count)
         t.nn.init.xavier_uniform_(self.l1.weight)
+        self.l2 = t.nn.Linear(self.layer_1_count, self.layer_1_count)
+        t.nn.init.xavier_uniform_(self.l2.weight)
         self.l3 = t.nn.Linear(self.layer_1_count, ACTION_COUNT)
         t.nn.init.xavier_uniform_(self.l3.weight)
 
@@ -25,6 +27,7 @@ class DQN(t.nn.Module):
 
     def forward(self, state_tensor):
         temp = t.nn.functional.relu(self.l1(state_tensor))
+        temp = t.nn.functional.relu(self.l2(temp))
         output = self.l3(temp)
         return output
 
