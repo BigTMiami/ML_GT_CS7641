@@ -2,6 +2,7 @@ ACTION_COUNT = 1
 from Assignment_1.neural.dqn_network import DQN
 from sklearn.model_selection import KFold
 
+
 import torch as t
 import numpy as np
 
@@ -67,6 +68,9 @@ class DQNAgent:
     def accuracy(self, actual, computed):
         correct = (actual == computed).sum().float()
         acc = 100 * correct / actual.shape[0]
+        if acc > 100.0:
+            print(f"ACC ISSUE for {acc}.  Correct:{correct} Total:{actual.shape[0]}")
+            acc = 0.0
         return acc
 
     def test_set_accuracy(self, show_details=False):
@@ -92,6 +96,27 @@ class DQNAgent:
         acc = self.accuracy(computed_labels, self.training_labels_tensor[cv_test_indexes])
         return acc
 
+    def train_with_cv_multi(self, show_details=True):
+        all_indexes = list(range(len(self.training_data_tensor)))
+        kf = KFold(n_splits=4)
+        split_count = 0
+
+        split_run_values = []
+        for train_indexes, test_indexes in kf.split(all_indexes):
+            print("============================================================")
+            print(f"Split {split_count}")
+            print("============================================================")
+
+            epoch_values = self.train(
+                show_details=show_details, cv_train_indexes=train_indexes, cv_test_indexes=test_indexes
+            )
+
+            split_count += 1
+
+        epoch_values = epoch_values / split_count
+
+        return epoch_values
+
     def train_with_cv(self, show_details=True):
         all_indexes = list(range(len(self.training_data_tensor)))
         kf = KFold(n_splits=4)
@@ -116,8 +141,8 @@ class DQNAgent:
         return epoch_values
 
     def train(self, show_details=True, cv_train_indexes=None, cv_test_indexes=None, epoch_values=None):
-        print("============================================================")
-        print(f"Epoch   Loss      Acc      Val        CV")
+        # print("============================================================")
+        # print(f"Epoch   Loss      Acc      Val        CV")
         if epoch_values is None:
             epoch_values = np.empty((self.epoch_count, 4))
         cv_acc = 0.0
@@ -128,7 +153,7 @@ class DQNAgent:
             if cv_test_indexes is not None:
                 cv_acc = self.cv_accuracy(cv_test_indexes)
             validation_accuracy = self.test_set_accuracy()
-            epoch_values[epoch_index] += epoch_loss, epoch_accuracy, validation_accuracy, cv_acc
+            epoch_values[epoch_index] = epoch_loss, epoch_accuracy, validation_accuracy, cv_acc
             if show_details:
                 print(
                     f"{epoch_index:3}  {epoch_loss:8.4f}   {epoch_accuracy:7.3f} {validation_accuracy:7.3f}%  {cv_acc:7.3f}%"

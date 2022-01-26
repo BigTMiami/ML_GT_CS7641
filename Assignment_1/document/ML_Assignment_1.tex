@@ -173,16 +173,36 @@ Figure \ref{fig:MNIST_Images_decision_tree_cross_validation}  shows the cross va
 
 \begin{figure}[htb]
 \centering
-\includegraphics[width=2.75in, height=4in]{figures/MNIST_Images_decision_tree.png}
-\caption{MNIST Images Decision Tree:  The left side of the chart shows rapidly growing accuracy as nodes are added, eventually reaching a peak accuracy.  The right side then shows overfitting with declining accuracy as less pruning increases the number of nodes and tree depth.  }
-\label{fig:MNIST_Images_decision_tree}
+\includegraphics[width=2.75in]{figures/MNIST_Images_decision_tree_cross_validation.png}
+\caption{MNIST Images Cross Validation Error:  The chart shows continual reduction in training error, while the Cross Validation error reaches a minimum at an $\alpha$ of 0.0000542 and then starts to rise.  This was very close to the best $\alpha$ found using the testing data. }
+\label{fig:MNIST_Images_decision_tree_cross_validation}
 \end{figure}
 
 The MNIST image data, shown in Figure \ref{fig:MNIST_Images_decision_tree}, showed a more normal accuracy curve than the Census Data, with accuracy improving dramatically with added nodes until a maximum accuracy was reached, then accuracy declines due to over fitting.  The maximum accuracy achieved was 88.7\%, which was significantly below the census data.  A decision tree is looking at one pixel at a time, 
 so small variations in position or size would be very challenging for this algorithm.  I think other classifiers, especially the neural network to better handle image data. 
 
+\section{Neural Networks}
+For the neural network, I used PyTorch with two hidden layers, the Adam optimizer and Linear layers.  I then adjusted the size of the layer, the learning rate, and epoch cycles to find the optimal settings.
 
+In just the initial setup for the Census data, I quickly determined I would need to scale the data as the solver would often "blow up" with really large values.  I used the sklearn StandardScaler module, which removes the mean from each feature then applies a sigmoid function to create values from -1 to 1.  This is somewhat suspect for the categorical features, as there is not really a positional relationship, but it was still effective.  I also switched to using a 4 Fold Cross Validation model as I became more worried about the smaller data.
 
+\begin{figure}[htb]
+\centering
+\includegraphics[width=2.75in, height=2.75in]{figures/Census_Data_Neural_Network_Error_Rates_by_Layer_Size__Learning_Rate_census.png}
+\caption{Census Data Neural Network:  Review started to look for optimizing the neural network.  The lowest error is clearly shown for the smaller learning rate with the smaller network.   }
+\label{fig:census_neural_network_start}
+\end{figure}
+
+ Figure \ref{fig:census_neural_network_start} clearly shows the preference for the smaller layer size and smaller learning rate, although the differences in absolute accuracy are quite small.  This is a victory still due to the very skewed dataset, with only ~6\% of the data being labeled positively.  The smaller layer size performance is straight out of the class lecture with regard to preferring simpler solutions.  I had expected larger layer sizes to be more effective.  The charts indicates that further exploration at the lower end was worthwhile.
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=2.75in, height=2.75in]{figures/Census_Data_Training_Error_Learning_Rate_chart_one.png}
+\caption{Census Data Neural Network Training Error:  It shows that the cross validation error was very close to the real test data error and a good guide for decision making.  }
+\label{fig:census_neural_network_error}
+\end{figure}
+
+Figure \ref{fig:census_neural_network_error} shows one of the best performing settings from the initial review.  It shows that the cross validation error was very close to the real test data error and a good guide for decision making.  The chart also doesn't clearly have a movement up of the cross validation error, indicating more epoch training may be beneficial
 
 \section{References}
 \begin{tabular}{l p{2.75in}}

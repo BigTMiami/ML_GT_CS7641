@@ -38,7 +38,7 @@ dqn = DQNAgent(
     test_labels=df_test_label_numeric.to_numpy(),
     network_learning_rate=0.00003,
     layer_one_size=10,
-    epoch_count=50,
+    epoch_count=5,
 )
 epoch_values = dqn.train_with_cv()
 
