@@ -55,7 +55,7 @@ def process_premutation_results(results):
     fig.suptitle("Census Data Neural Network", fontsize=16)
     ax.set_title("Error Rates by Layer Size, Learning Rate")
     for lr in np.unique(results[:, 0]):
-        filtered_results = results[(lr == results[:, 0]) & (200 == results[:, 2])]
+        filtered_results = results[(lr == results[:, 0])]
         x = filtered_results[:, 1]
         y = 100 - filtered_results[:, 6]
         ax.plot(x, y, label=f"Learning Rate {lr}")
@@ -74,7 +74,7 @@ def title_to_filename(title, classifier_type):
     safe_title = title.replace(" ", "_")
     safe_title = safe_title.replace(":", "_")
     safe_title = safe_title.replace(",", "_")
-    return f"Assignment_1/document/figures/{safe_title}_{classifier_type}.png"
+    return f"Assignment_1/document/figures/working/{safe_title}_{classifier_type}.png"
 
 
 def plot_epoch_error(avg_scores, start_node=5, title="Census", subtitle="Error"):
@@ -166,44 +166,40 @@ def train_permutations(**kwargs):
 if __name__ == "main":
     # Census Data
     (
-        df_data,
-        df_label,
-        df_data_numeric,
-        df_label_numeric,
+        df_train_data,
+        df_train_label,
+        np_train_data_numeric,
+        np_train_label_numeric,
         df_test_data,
         df_test_label,
-        df_test_data_numeric,
-        df_test_label_numeric,
+        np_test_data_numeric,
+        np_test_label_numeric,
         data_classes,
-    ) = get_census_data_and_labels()
-
-    scaler = StandardScaler()
-    scaler.fit(df_data_numeric.to_numpy())
-    scaled_training_data = scaler.transform(df_data_numeric.to_numpy())
-    scaled_test_data = scaler.transform(df_test_data_numeric.to_numpy())
-
-    results = train_with_cv(
-        training_data=scaled_training_data,
-        training_labels=df_label_numeric.to_numpy(),
-        test_data=scaled_test_data,
-        test_labels=df_test_label_numeric.to_numpy(),
-        network_learning_rate=0.00005,
-        layer_one_size=10,
-        epoch_count=100,
-    )
-
-    best_cv_epoch, best_test_score, epoch_scores = process_results(results)
-
-    plot_epoch_error(epoch_scores)
+    ) = get_census_data_and_labels(scale_numeric=True)
 
     permutation_results = train_permutations(
-        training_data=scaled_training_data,
-        training_labels=df_label_numeric.to_numpy(),
-        test_data=scaled_test_data,
-        test_labels=df_test_label_numeric.to_numpy(),
-        network_learning_rate_set=[0.00001, 0.00002, 0.00004, 0.00008],
-        layer_one_size_set=[10, 20, 40, 80],
-        epoch_count_set=[100, 200],
+        training_data=np_train_data_numeric,
+        training_labels=np_train_label_numeric,
+        test_data=np_test_data_numeric,
+        test_labels=np_test_label_numeric,
+        network_learning_rate_set=[0.000001, 0.000005, 0.00001],
+        layer_one_size_set=[4, 8, 16],
+        epoch_count_set=[750],
     )
 
-    process_premutation_results(results)
+    process_premutation_results(permutation_results)
+
+    if False:
+        results = train_with_cv(
+            training_data=np_train_data_numeric,
+            training_labels=np_train_label_numeric,
+            test_data=np_test_data_numeric,
+            test_labels=np_test_label_numeric,
+            network_learning_rate=0.00005,
+            layer_one_size=10,
+            epoch_count=100,
+        )
+
+        best_cv_epoch, best_test_score, epoch_scores = process_results(results)
+
+        plot_epoch_error(epoch_scores)

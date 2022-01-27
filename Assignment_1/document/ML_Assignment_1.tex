@@ -134,9 +134,11 @@ Decision Trees. For the decision tree, you should implement or steal a decision 
 
 I used the DecisionTreeClassifier algorithm from the sklearn library.  By default, this uses a GINI index to split the data.  It was possible to use an information gain entropy for splitting, but this did not make a meaningful difference in results for the datasets so the GINI index was used.  A key aspect of sklearn is that it only accepts numeric data for features and treats all features as continuous.  Because of this, a feature can appear in multiple nodes within the same path, with different thresholds.  It also means this is a binary tree, with each node having only two edges.  Other decision tree implementations might allow for discreet features, meaning a feature could only appear once in any tree path and the tree might not be binary.  
 
+At first I thought this would make the tree more complex, but I think there is a reasonable tradeoff.  A tree that always creates a node for all discrete values will always create the maximum amount of nodes but only adds one level of depth to the tree.  The sklearn continous tree may not need to create nodes for every value, but it will end up with greater depth if more than one node needs to be created.  
+
 sklearn also uses a randomizing element, which means that given the same set of data, it may produce different results each run.  In order to produce consistent, repeatable results, the random state setting was set to a fixed value to produce the same results each time.
 
-I also used the sklearn Cross Validation module for estimating the best solution without using the test data.  This was then confirmed by reviewing the test data.
+I used the sklearn Cross Validation module for estimating the best solution without using the test data as described in more detail below.
 
 \begin{figure}[htb]
 \centering
@@ -151,7 +153,6 @@ I also used the sklearn Cross Validation module for estimating the best solution
 \caption{Census Data Decision Tree:  The right side of the upper chart shows overfitting as the pruning is reduced and the number of nodes and tree depth increases.  An unusual aspect is the left side of the chart shows very high accuracy with very few nodes.  This stems from one feature being highly correlated to the labeled output.}
 \label{fig:census_data_decision_tree}
 \end{figure}
-
 
 To prune the tree, sklearn uses a minimal cost-complexity setting.  Each node in a tree has an $\alpha$ value which measures the node misclassifications minus leaves misclassifications divided by the number of leaf nodes.  The DecisionTreeClassifier then takes an $\alpha$ minimum setting, pruning all subtrees with a lower $\alpha$.   For both datasets, an accuracy curve was created by fitting the tree with different $\alpha$ values.  
 
@@ -182,27 +183,39 @@ The MNIST image data, shown in Figure \ref{fig:MNIST_Images_decision_tree}, show
 so small variations in position or size would be very challenging for this algorithm.  I think other classifiers, especially the neural network to better handle image data. 
 
 \section{Neural Networks}
-For the neural network, I used PyTorch with two hidden layers, the Adam optimizer and Linear layers.  I then adjusted the size of the layer, the learning rate, and epoch cycles to find the optimal settings.
+For the neural network, I used PyTorch with two hidden layers, the Adam optimizer and Linear layers.  I then adjusted the size of the layer, the learning rate, and epoch cycles to find the optimal settings.  I used mean squared error loss, which I don't think is a great fit for a binary classification, but had significant trouble getting that type of model to work.  
 
-In just the initial setup for the Census data, I quickly determined I would need to scale the data as the solver would often "blow up" with really large values.  I used the sklearn StandardScaler module, which removes the mean from each feature then applies a sigmoid function to create values from -1 to 1.  This is somewhat suspect for the categorical features, as there is not really a positional relationship, but it was still effective.  I also switched to using a 4 Fold Cross Validation model as I became more worried about the smaller data.
+In just the initial setup for the Census data, I quickly determined I would need to scale the data as the solver would often "blow up" with really large values.  I used the sklearn StandardScaler module, which removes the mean from each feature then applies a sigmoid function to create values from -1 to 1.  This is somewhat suspect for the categorical features, as there is not really a positional relationship, but it was still effective.  I also changed my cross validation process.  I used a 4 folds instead of 5 as I became more worried about the small amount of positive labels.  This also speeded up processing.  In addition, I created my own cross validation process because of my custom neural network. 
 
 \begin{figure}[htb]
 \centering
-\includegraphics[width=2.75in, height=2.75in]{figures/Census_Data_Neural_Network_Error_Rates_by_Layer_Size__Learning_Rate_census.png}
-\caption{Census Data Neural Network:  Review started to look for optimizing the neural network.  The lowest error is clearly shown for the smaller learning rate with the smaller network.   }
+\includegraphics[width=2.5in, height=2.5in]{figures/Census_Data_Neural_Network_Error_Rates_by_Layer_Size__Learning_Rate_census.png}
+\caption{Census Data Neural Network:  Built using PyTorch, linear functions and two hidden layers.  The lowest error is clearly shown for the smaller learning rate with the smaller network.   }
 \label{fig:census_neural_network_start}
 \end{figure}
 
- Figure \ref{fig:census_neural_network_start} clearly shows the preference for the smaller layer size and smaller learning rate, although the differences in absolute accuracy are quite small.  This is a victory still due to the very skewed dataset, with only ~6\% of the data being labeled positively.  The smaller layer size performance is straight out of the class lecture with regard to preferring simpler solutions.  I had expected larger layer sizes to be more effective.  The charts indicates that further exploration at the lower end was worthwhile.
+Figure \ref{fig:census_neural_network_start} clearly shows the preference for the smaller layer size and smaller learning rate, although the differences in absolute accuracy are quite small.  This is a victory still due to the very skewed dataset, with only ~6\% of the data being labeled positively.  The smaller layer size performance is straight out of the class lecture with regard to preferring simpler solutions.  I had expected larger layer sizes to be more effective.  The charts indicates that further exploration at the lower end was worthwhile.
 
 \begin{figure}[htb]
 \centering
-\includegraphics[width=2.75in, height=2.75in]{figures/Census_Data_Training_Error_Learning_Rate_chart_one.png}
+\includegraphics[width=2.5in, height=2.5in]{figures/Census_Data_Training_Error_Learning_Rate_chart_one.png}
 \caption{Census Data Neural Network Training Error:  It shows that the cross validation error was very close to the real test data error and a good guide for decision making.  }
 \label{fig:census_neural_network_error}
 \end{figure}
 
-Figure \ref{fig:census_neural_network_error} shows one of the best performing settings from the initial review.  It shows that the cross validation error was very close to the real test data error and a good guide for decision making.  The chart also doesn't clearly have a movement up of the cross validation error, indicating more epoch training may be beneficial
+Figure \ref{fig:census_neural_network_error} shows one of the best performing settings from the initial review.  It shows that the cross validation error was very close to the real test data error and a good guide for decision making.  The chart also doesn't clearly have a movement up of the cross validation error, indicating more epoch training could be beneficial.
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=2.5in, height=2.5in]{figures/Census_Data_Neural_Network_Error_Rates_by_Layer_Size__Learning_Rate_census_v2.png}
+\caption{Census Data Neural Network:   Lower settings for layer size and learning rate were used in testing.   However, the absolute gains were very, very small, indicating the maximum performance for this dataset.   }
+\label{fig:census_neural_network_v2}
+\end{figure}
+
+I then tried a new round of testing with lower learning rates, smaller network sizes and longer epoch training.  Those results are shown in Figure \ref{fig:census_neural_network_error}.  The absolute gains over in performance where very, very small, indicating that this was the practical limit of performance.  The best result was with a learning rate of 0.000001, hidden layer size of 16, with the best result coming around 600 epochs of training.  This performed worse than the decision tree.  
+
+
+
 
 \section{References}
 \begin{tabular}{l p{2.75in}}
