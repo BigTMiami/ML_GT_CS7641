@@ -23,9 +23,9 @@ def plot_epoch_error(avg_scores, start_node=0, title="MNIST", subtitle="Error"):
     fig.suptitle(title, fontsize=16)
     x = list(range(start_node, len(avg_scores)))
     ax.set_title(subtitle)
-    # ax.plot(x, avg_error[start_node:, 1], label="Training Data")
-    ax.plot(x, avg_error[start_node:, 2], label="Cross Val Data")
-    ax.plot(x, avg_error[start_node:, 3], label="Test Data")
+    ax.plot(x, avg_error[start_node:, 2], label="Training Data")
+    ax.plot(x, avg_error[start_node:, 3], label="Cross Val Data")
+    ax.plot(x, avg_error[start_node:, 4], label="Test Data")
     ax.set_xlabel("Epoch")
     ax.set_ylabel("Error")
     plt.legend()
@@ -66,14 +66,15 @@ def process_results(results):
 
 
 def train_with_cv(**kwargs):
-    train_data = kwargs["train_data"]
-    train_one_hot_labels = kwargs["train_one_hot_labels"]
-    train_labels = kwargs["train_labels"]
+    all_train_data = kwargs["train_data"]
+    all_train_one_hot_labels = kwargs["train_one_hot_labels"]
+    all_train_labels = kwargs["train_labels"]
     test_data = kwargs["test_data"]
     test_labels = kwargs["test_labels"]
     epoch_count = kwargs["epoch_count"]
+    batch_size = kwargs["batch_size"]
     use_cnn = kwargs["use_cnn"]
-    all_indexes = list(range(len(train_data)))
+    all_indexes = list(range(len(all_train_data)))
     kf = KFold(n_splits=4)
     split_count = 0
 
@@ -82,29 +83,25 @@ def train_with_cv(**kwargs):
     print(f"Loading Splits ")
 
     for train_indexes, test_indexes in kf.split(all_indexes):
-        mnist = MNISTData(train_data[train_indexes], train_one_hot_labels[train_indexes])
-        cv_data = train_data[test_indexes]
-        cv_labels = train_labels[test_indexes]
-        mnist_loader = DataLoader(mnist, batch_size=100, shuffle=True)
+        train_data = all_train_data[train_indexes]
+        train_one_hot_labels = all_train_one_hot_labels[train_indexes]
+        train_labels = all_train_labels[train_indexes]
+        cv_data = all_train_data[test_indexes]
+        cv_labels = all_train_labels[test_indexes]
 
-        if use_cnn:
-            model = MNISTNetCNN(
-                training_data_loader=mnist_loader,
-                test_data=test_data,
-                test_labels=test_labels,
-                cv_data=cv_data,
-                cv_labels=cv_labels,
-                epoch_count=epoch_count,
-            )
-        else:
-            model = MNISTNet(
-                training_data_loader=mnist_loader,
-                test_data=test_data,
-                test_labels=test_labels,
-                cv_data=cv_data,
-                cv_labels=cv_labels,
-                epoch_count=epoch_count,
-            )
+        model = MNISTNetCNN(
+            train_data=train_data,
+            train_one_hot_labels=train_one_hot_labels,
+            train_labels=train_labels,
+            test_data=test_images,
+            test_labels=test_labels,
+            cv_data=test_images,
+            cv_labels=test_labels,
+            epoch_count=epoch_count,
+            batch_size=batch_size,
+            use_cnn=use_cnn,
+        )
+
         training_set = (split_count, model)
 
         all_training_sets.append(training_set)
@@ -128,6 +125,45 @@ if __name__ == "main":
         test_labels,
     ) = get_mnist_data_labels_neural(flatten_images=False)
 
+    results = train_with_cv(
+        train_data=train_data,
+        train_one_hot_labels=train_one_hot_labels,
+        train_labels=train_labels,
+        test_data=test_images,
+        test_labels=test_labels,
+        epoch_count=300,
+        batch_size=100,
+        use_cnn=True,
+    )
+
+    best_cv_epoch, best_cv_score, best_test_epoch, best_test_score, avg_scores = process_results(results)
+
+    plot_epoch_error(avg_scores, title="MNIST Images CNN")
+
+    (
+        flattened_train_data,
+        train_one_hot_labels,
+        train_labels,
+        test_images,
+        test_one_hot_labels,
+        test_labels,
+    ) = get_mnist_data_labels_neural(flatten_images=True)
+
+    flattened_results = train_with_cv(
+        train_data=flattened_train_data,
+        train_one_hot_labels=train_one_hot_labels,
+        train_labels=train_labels,
+        test_data=test_images,
+        test_labels=test_labels,
+        epoch_count=300,
+        batch_size=100,
+        use_cnn=False,
+    )
+
+    best_cv_epoch, best_cv_score, best_test_epoch, best_test_score, avg_scores = process_results(flattened_results)
+
+    plot_epoch_error(avg_scores, title="MNIST Images Neural Network")
+
     model = MNISTNetCNN(
         train_data=train_data,
         train_one_hot_labels=train_one_hot_labels,
@@ -136,8 +172,9 @@ if __name__ == "main":
         test_labels=test_labels,
         cv_data=test_images,
         cv_labels=test_labels,
-        epoch_count=10,
+        epoch_count=100,
         batch_size=100,
+        use_cnn=False,
     )
     results = model.train()
 

@@ -220,8 +220,8 @@ For this network, I used a different loss function, Cross Entropy Loss, to accou
 
 \begin{figure}[htb]
 \centering
-\includegraphics[width=2.5in, height=2.5in]{figures/MNIST_Error_neural_network.png}
-\caption{MNIST Neural Network:  This uses the flattened images and no convolutional networks, with a cross validation using a 4 fold split.  The cross validation error closely tracking the test set error. The best accuracy reached was 97.27\%, reached around the 275 epoch of training.  }
+\includegraphics[width=2.5in, height=2.5in]{figures/MNIST_Images_Neural_Network_Error_MNIST.png}
+\caption{MNIST Neural Network:  This uses the flattened images and no convolutional networks, with a cross validation using a 4 fold split.  The cross validation error closely tracking the test set error. The best accuracy reached was 97.27\%,  with 275 epoch of training.  }
 \label{fig:MNIST_Error_neural_network}
 \end{figure}
 
@@ -231,10 +231,16 @@ A key distinction in the MNIST dataset is that each feature has a spatial relati
 
 \begin{figure}[htb]
 \centering
-\includegraphics[width=2.5in, height=2.5in]{figures/MNIST_Error_neural_network.png}
-\caption{MNIST Neural Network:  This uses the flattened images and no convolutional networks, with a cross validation using a 4 fold split.  The cross validation error closely tracking the test set error. The best accuracy reached was 97.27\%, reached around the 275 epoch of training.  }
-\label{fig:MNIST_Error_neural_network}
+\includegraphics[width=2.5in, height=2.5in]{figures/MNIST_Images_CNN_Error_MNIST.png}
+\caption{MNIST Convolutional Neural Network:  This network used two convolutional layers, creating much better performance.  It reached the the same accuracy of the non CNN network in ~13 epochs, which took 275 epochs.  The overfitting is just starting to be seen around 100 epochs. }
+\label{fig:MNIST_Error_MNIST_cnn}
 \end{figure}
+
+The results were much better using the convolutional networks.  Figure \ref{fig:MNIST_Error_MNIST_cnn} shows the great increase in performance, with it reaching the the same accuracy of the non CNN network in 13 epochs vs 275 epochs.  However, the training time was much greater, with the CNN layers required significant processing. The maximum accuracy also improved by ~1.5\% to 98.89\%, which starts to become very accurate.. 
+
+The CNN layers represent use of domain knowledge about image data and demonstrate the flexible power of neural networks.  
+
+\section{Boosting}
 
 
 

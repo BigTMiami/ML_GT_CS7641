@@ -12,17 +12,19 @@ from torch.utils.data import Dataset, DataLoader
 class MNISTNetCNN(nn.Module):
     def __init__(self, **kwargs):
         super().__init__()
-        # self.conv1 = nn.Conv2d(3, 6, 5)
-        # self.pool = nn.MaxPool2d(2, 2)
-        # self.conv2 = nn.Conv2d(6, 16, 5)
-        # self.fc1 = nn.Linear(16 * 5 * 5, 120)
-        self.conv1 = nn.Conv2d(1, 10, 5)
-        self.pool = nn.MaxPool2d(2, 2)
-        self.conv2 = nn.Conv2d(10, 20, 5)
-        self.fc1 = nn.Linear(20 * 4 * 4, 120)
-        # self.fc1 = nn.Linear(784, 120)
-        self.fc2 = nn.Linear(120, 84)
-        self.fc3 = nn.Linear(84, 10)
+        self.use_cnn = kwargs["use_cnn"]
+
+        if self.use_cnn:
+            self.conv1 = nn.Conv2d(1, 10, 5)
+            self.pool = nn.MaxPool2d(2, 2)
+            self.conv2 = nn.Conv2d(10, 20, 5)
+            self.fc1 = nn.Linear(20 * 4 * 4, 120)
+            self.fc2 = nn.Linear(120, 84)
+            self.fc3 = nn.Linear(84, 10)
+        else:
+            self.fc1 = nn.Linear(784, 120)
+            self.fc2 = nn.Linear(120, 84)
+            self.fc3 = nn.Linear(84, 10)
 
         self.criterion = nn.CrossEntropyLoss()
         self.optimizer = optim.SGD(self.parameters(), lr=0.001, momentum=0.9)
@@ -44,12 +46,17 @@ class MNISTNetCNN(nn.Module):
         self.epoch_count = kwargs["epoch_count"]
 
     def forward(self, x):
-        x = self.pool(F.relu(self.conv1(x)))
-        x = self.pool(F.relu(self.conv2(x)))
-        x = t.flatten(x, 1)  # flatten all dimensions except batch
-        x = F.relu(self.fc1(x))
-        x = F.relu(self.fc2(x))
-        x = self.fc3(x)
+        if self.use_cnn:
+            x = self.pool(F.relu(self.conv1(x)))
+            x = self.pool(F.relu(self.conv2(x)))
+            x = t.flatten(x, 1)  # flatten all dimensions except batch
+            x = F.relu(self.fc1(x))
+            x = F.relu(self.fc2(x))
+            x = self.fc3(x)
+        else:
+            x = F.relu(self.fc1(x))
+            x = F.relu(self.fc2(x))
+            x = self.fc3(x)
         return x
 
     def check_accuracy(self, input, labels):
