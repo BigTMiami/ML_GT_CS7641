@@ -1,10 +1,40 @@
 from sklearn.model_selection import KFold
 from Assignment_1.neural.mnist_network_model import MNISTNet, MNISTData
+from Assignment_1.neural.mnist_network_model_cnn import MNISTNetCNN
 import multiprocessing
 from torch.utils.data import DataLoader
 from Assignment_1.neural.mnist_multi_module import run_training
 from Assignment_1.mnist_data_prep import get_mnist_data_labels_neural
 import numpy as np
+import matplotlib.pyplot as plt
+import os
+
+
+def title_to_filename(title, classifier_type):
+    safe_title = title.replace(" ", "_")
+    safe_title = safe_title.replace(":", "_")
+    safe_title = safe_title.replace(",", "_")
+    return f"Assignment_1/document/figures/working/{safe_title}_{classifier_type}.png"
+
+
+def plot_epoch_error(avg_scores, start_node=0, title="MNIST", subtitle="Error"):
+    avg_error = 100.0 - avg_scores
+    fig, ax = plt.subplots(1, figsize=(4, 5))
+    fig.suptitle(title, fontsize=16)
+    x = list(range(start_node, len(avg_scores)))
+    ax.set_title(subtitle)
+    # ax.plot(x, avg_error[start_node:, 1], label="Training Data")
+    ax.plot(x, avg_error[start_node:, 2], label="Cross Val Data")
+    ax.plot(x, avg_error[start_node:, 3], label="Test Data")
+    ax.set_xlabel("Epoch")
+    ax.set_ylabel("Error")
+    plt.legend()
+
+    filename = title_to_filename(title + " " + subtitle, "MNIST")
+    if os.path.exists(filename):
+        os.remove(filename)
+    fig.tight_layout()
+    plt.savefig(fname=filename, bbox_inches="tight")
 
 
 def process_results(results):
@@ -42,6 +72,7 @@ def train_with_cv(**kwargs):
     test_data = kwargs["test_data"]
     test_labels = kwargs["test_labels"]
     epoch_count = kwargs["epoch_count"]
+    use_cnn = kwargs["use_cnn"]
     all_indexes = list(range(len(train_data)))
     kf = KFold(n_splits=4)
     split_count = 0
@@ -56,14 +87,24 @@ def train_with_cv(**kwargs):
         cv_labels = train_labels[test_indexes]
         mnist_loader = DataLoader(mnist, batch_size=100, shuffle=True)
 
-        model = MNISTNet(
-            training_data_loader=mnist_loader,
-            test_data=test_data,
-            test_labels=test_labels,
-            cv_data=cv_data,
-            cv_labels=cv_labels,
-            epoch_count=epoch_count,
-        )
+        if use_cnn:
+            model = MNISTNetCNN(
+                training_data_loader=mnist_loader,
+                test_data=test_data,
+                test_labels=test_labels,
+                cv_data=cv_data,
+                cv_labels=cv_labels,
+                epoch_count=epoch_count,
+            )
+        else:
+            model = MNISTNet(
+                training_data_loader=mnist_loader,
+                test_data=test_data,
+                test_labels=test_labels,
+                cv_data=cv_data,
+                cv_labels=cv_labels,
+                epoch_count=epoch_count,
+            )
         training_set = (split_count, model)
 
         all_training_sets.append(training_set)
@@ -79,21 +120,65 @@ def train_with_cv(**kwargs):
 
 if __name__ == "main":
     (
-        train_images_flattened,
+        train_data,
         train_one_hot_labels,
         train_labels,
-        test_images_flattened,
+        test_images,
         test_one_hot_labels,
         test_labels,
-    ) = get_mnist_data_labels_neural()
+    ) = get_mnist_data_labels_neural(flatten_images=False)
 
-    results = train_with_cv(
-        train_data=train_images_flattened,
+    model = MNISTNetCNN(
+        train_data=train_data,
         train_one_hot_labels=train_one_hot_labels,
         train_labels=train_labels,
-        test_data=test_images_flattened,
+        test_data=test_images,
         test_labels=test_labels,
-        epoch_count=100,
+        cv_data=test_images,
+        cv_labels=test_labels,
+        epoch_count=10,
+        batch_size=100,
+    )
+    results = model.train()
+
+    best_cv_epoch, best_cv_score, best_test_epoch, best_test_score, avg_scores = process_results([[0, results]])
+
+    plot_epoch_error(avg_scores)
+
+    results = train_with_cv(
+        train_data=train_data,
+        train_one_hot_labels=train_one_hot_labels,
+        train_labels=train_labels,
+        test_data=test_images,
+        test_labels=test_labels,
+        epoch_count=10,
+        use_cnn=True,
     )
 
     best_cv_epoch, best_cv_score, best_test_epoch, best_test_score, avg_scores = process_results(results)
+
+    plot_epoch_error(avg_scores)
+
+    if False:
+        (
+            train_images_flattened,
+            train_one_hot_labels,
+            train_labels,
+            test_images_flattened,
+            test_one_hot_labels,
+            test_labels,
+        ) = get_mnist_data_labels_neural()
+
+        results = train_with_cv(
+            train_data=train_images_flattened,
+            train_one_hot_labels=train_one_hot_labels,
+            train_labels=train_labels,
+            test_data=test_images_flattened,
+            test_labels=test_labels,
+            epoch_count=10,
+            use_cnn=False,
+        )
+
+        best_cv_epoch, best_cv_score, best_test_epoch, best_test_score, avg_scores = process_results(results)
+
+        plot_epoch_error(avg_scores)

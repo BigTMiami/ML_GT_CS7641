@@ -212,8 +212,29 @@ Figure \ref{fig:census_neural_network_error} shows one of the best performing se
 \label{fig:census_neural_network_v2}
 \end{figure}
 
-I then tried a new round of testing with lower learning rates, smaller network sizes and longer epoch training.  Those results are shown in Figure \ref{fig:census_neural_network_error}.  The absolute gains over in performance where very, very small, indicating that this was the practical limit of performance.  The best result was with a learning rate of 0.000001, hidden layer size of 16, with the best result coming around 600 epochs of training.  This performed worse than the decision tree.  
+I then tried a new round of testing with lower learning rates, smaller network sizes and longer epoch training.  Those results are shown in Figure \ref{fig:census_neural_network_error}.  The absolute gains over in performance where very, very small, indicating that this was the practical limit of performance.  The best result was with a learning rate of 0.000001, hidden layer size of 16, with the best result coming around 600 epochs of training.  This performed worse than the decision tree. 
 
+For the MNIST data, I created a different neural network topology.  The PyTorch site has many helpful resources and tutorials [3] providing good guidance for one hot encoding.  The MNIST dataset is a very popular one and there are many neural network implementations, but I stuck to refereing to the general PyTorch tutorial.I was able to use this as a skeleton to explore the algorithm and the data. I kept the image data flattened, creating 784 input features.  I then had two hidden layers, the first with 120 nodes, the second with 84 nodes.  For the output, I used one hot encoding on the labels, with one bit for each value between 0 and 9, creating 10 outputs.  To convert the 10 outputs to a single integer, the bit with the highest value is chosen.  I did not initially include any convolutional layers to allow for a more accurate comparison between the decision tree and the neural network.
+
+For this network, I used a different loss function, Cross Entropy Loss, to account for the single selection amongst one of ten output bits.  I also used the SGD optimizer with momentum. 
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=2.5in, height=2.5in]{figures/MNIST_Error_neural_network.png}
+\caption{MNIST Neural Network:  This uses the flattened images and no convolutional networks, with a cross validation using a 4 fold split.  The cross validation error closely tracking the test set error. The best accuracy reached was 97.27\%, reached around the 275 epoch of training.  }
+\label{fig:MNIST_Error_neural_network}
+\end{figure}
+
+Figure \ref{fig:MNIST_Error_neural_network} shows the result of the initial review with the flattened images.  Cross validation closely tracks the test accuracy, indicating it is a good tool for decision making.  The training improvement plateaued around 275 epochs of training.  The best accuracy reached here was 97.27\%, which is ~9\% better than the decision tree.  I think this is a result of several things.  From the dataset's standpoint, it is a completely continuous data set, with no discrete values, which is better for the linear layers of the neural network.  It is also a less noisy dataset, with a reasonable outcome expected for each instance.  In contrast, the Census data does not have a necessary relationship, with some instances conflicting with other ones on output labels.  I also think the cross entropy loss function is also much better fit for this classification problem.
+
+A key distinction in the MNIST dataset is that each feature has a spatial relationship to the others, in the form of a 2 dimensional grid.  It is a common practice to use convolutional networks to take advantage of that relationship.  I added two convolutional networks to the beginning of the network.  The first added 10 channels and used a kernel size of 5.  This means that for each 5 X 5 grid, a 5 X 5 filter is applied that multiplies each grid by the filter number, then sums the results.  This is moved over all parts of the image and allows for spatial features to be highlighted.  There is a different filter for each channel, with the different filters enhancing aspects of the grid, like edge detection.  Without padding the image, this will result in an output that has 4 less on each dimension, reducing the 28 X 28 grid to 24 X 24.   There is then a pooling layer that takes each 2 X 2 grid and choses the max value.  This reduces teach dimension by 2, changing the 24 X 24 grid to 12 X 12.  Another convolutional layer was added with 20 channels, leading to an output of 20 X 4 X 4.  This was then connected to the previous network.
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=2.5in, height=2.5in]{figures/MNIST_Error_neural_network.png}
+\caption{MNIST Neural Network:  This uses the flattened images and no convolutional networks, with a cross validation using a 4 fold split.  The cross validation error closely tracking the test set error. The best accuracy reached was 97.27\%, reached around the 275 epoch of training.  }
+\label{fig:MNIST_Error_neural_network}
+\end{figure}
 
 
 
@@ -223,5 +244,7 @@ I then tried a new round of testing with lower learning rates, smaller network s
 1 & Census Income (KDD). url: https://archive-beta.ics.uci.edu/ml/datasets/census+income+kdd.
 \\
 2 & The MNIST Database of Handwritten Digits. url: http://yann.lecun.com/exdb/mnist/.
+\\
+3 & Pytorch Tutorial on Training a Classifier. url: https://pytorch.org/tutorials/beginner/blitz/cifar10\_tutorial.html.
 \end{tabular}
 \end{document}
