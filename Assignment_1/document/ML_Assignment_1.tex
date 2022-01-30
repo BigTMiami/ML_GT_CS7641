@@ -181,6 +181,8 @@ Figure \ref{fig:MNIST_Images_decision_tree_cross_validation}  shows the cross va
 \label{fig:MNIST_Images_decision_tree_cross_validation}
 \end{figure}
 
+NEED TO FIX
+
 The MNIST image data, shown in Figure \ref{fig:MNIST_Images_decision_tree}, showed a more normal accuracy curve than the Census Data, with accuracy improving dramatically with added nodes until a maximum accuracy was reached, then accuracy declines due to over fitting.  The maximum accuracy achieved was 88.7\%, which was significantly below the census data.  A decision tree is looking at one pixel at a time, 
 so small variations in position or size would be very challenging for this algorithm.  I think other classifiers, especially the neural network to better handle image data. 
 
@@ -297,16 +299,25 @@ Figure \ref{fig:boosting_census_4}  shows maximum features of 5 with 200 estimat
 
 For the MNIST data, I reviewed the estimator count vs max depth to begin with.  I set the maximum features to 28, the square root of the features, which is a commonly used starting point.
 
-Figure \ref{fig:boosting_mnist_1}  shows overfitting with relatively few estimators.  An interesting point is that the over fitting then reaches a plateau, which may be from the interplay between maximum features and maximum depth.  It is also a bit hard to make sense of the max depth, as the best performing are extreme edges of 2,4, and 15. 
+Figure \ref{fig:boosting_mnist_1}  shows overfitting with relatively few estimators.  An interesting point is that the over fitting then reaches a plateau, which may be from the interplay between maximum features and maximum depth.  It is also a bit hard to make sense of the max depth, as the best performing are the low of 2,4, and high of 15. 
 
 \begin{figure}[htb]
 \centering
-\includegraphics[width=2.5in, height=2.5in]{figures/MNIST_Boosted_Ensemble_boosting_1.png}
-\caption{MNIST Data Max Depth:  The shows overfitting occurs with relatively few estimators.  Maximum features was set to 28.  }
+\includegraphics[width=2.5in, height=2.5in]{figures/MNIST_Boosted_Ensemble_boosting_2.png}
+\caption{MNIST Data Max Feature vs Max Depth:  This shows that the best performing max depth is 15, then 4, then 2.  It is odd that the high and low maximum depths perform better. The number of estimators was 25.  }
 \label{fig:boosting_mnist_2}
 \end{figure}
 
-More review was performed for a fixed number of estimators
+More review was then performed using a fixed number of estimators, 25. Figure \ref{fig:boosting_mnist_2} shows the result, with the best results being a max depth of 15, with more features generally performing better.
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=2.5in, height=2.5in]{figures/MNIST_Boosted_Ensemble_boosting_3.png}
+\caption{MNIST Data Max Feature vs Max Depth:  The number of estimators was 25.  }
+\label{fig:boosting_mnist_3}
+\end{figure}
+
+The final review, seen in Figure \ref{fig:boosting_mnist_3}, shows the best performance with a max depth of 14 and max features of 38.  This achieved accuracy of 94.44\%, which is significantly better than the decision tree, but not as good as the neural network.  This makes sense, as the boosted ensemble is better able to deal with the large number of features, but still doesn't take optimum advantage of the spatial relationships in image files.
 
 
 \section{References}

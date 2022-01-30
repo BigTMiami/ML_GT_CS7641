@@ -98,7 +98,7 @@ def show_permutation_results(results, x_col, line_col, title, subtitle):
         x = filtered_results[fr_sort, x_index]
         y = 1 - filtered_results[fr_sort, 5]
         ax.plot(x, y, label=f"{line_col} {line_value}")
-    ax.set_xlabel("Number of Estimators")
+    ax.set_xlabel(x_col)
     ax.set_ylabel("Error")
     plt.legend()
 
@@ -267,12 +267,35 @@ if __name__ == "main":
         loss_function="deviance",
     )
 
-    mn_est_vs_depth_results
+    mn_feature_vs_depth_results
 
     show_permutation_results(
-        mn_est_vs_depth_results,
-        x_col="n_estimators",
+        mn_feature_vs_depth_results,
+        x_col="max_features",
         line_col="max_depth",
         title="MNIST Boosted Ensemble",
-        subtitle="Error Rates by Estimator Count, Max Depth",
+        subtitle="Error Rates by Max Features, Max Depth",
+    )
+
+    mn_feature_vs_depth_results_2 = train_permutations(
+        train_data=mn_train_data,
+        train_labels=mn_train_labels,
+        test_data=mn_test_images,
+        test_labels=mn_test_labels,
+        n_estimators_set=[25],
+        max_features_set=[28, 30, 33, 38],
+        max_depth_set=[13, 14, 15, 16, 17],
+        cv_count=4,
+        use_cv=False,
+        loss_function="deviance",
+    )
+
+    mn_feature_vs_depth_results_2
+
+    show_permutation_results(
+        mn_feature_vs_depth_results_2,
+        x_col="max_features",
+        line_col="max_depth",
+        title="MNIST Boosted Ensemble",
+        subtitle="Error Rates by Max Features, Max Depth",
     )
