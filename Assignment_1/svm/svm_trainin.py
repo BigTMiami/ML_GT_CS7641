@@ -86,34 +86,29 @@ def train_permutations_multi(**kwargs):
     return results
 
 
-def show_permutation_results(results, x_col, line_col, title, subtitle):
-    columns = ["n_estimators", "max_features", "max_depth", "train_score", "cv_score", "test_score"]
-
-    x_index = columns.index(x_col)
-    line_index = columns.index(line_col)
+def show_permutation_results_bar(results, x_col, title, subtitle):
+    columns = ["kernel", "train_score", "cv_score", "test_score"]
 
     r = np.array(results)
-    rs = r[:, 5].argsort(axis=0)[::-1]
+    rs = r[:, 3].argsort(axis=0)[::-1]
     r_show = r[rs, :]
-    for n_estimators, max_features, max_depth, train_score, cv_score, test_score in r_show:
+    for kernel, train_score, cv_score, test_score in r_show:
         print(
-            f"{n_estimators}, {max_features}, {max_depth}:  test:{test_score*100:6.3f} cv:{cv_score*100:6.3f} train:{train_score*100:6.3f}"
+            f"{kernel:>10}:  test:{float(test_score)*100:6.3f} cv:{float(cv_score)*100:6.3f} train:{float(train_score)*100:6.3f}"
         )
 
     fig, ax = plt.subplots(1, figsize=(4, 5))
     fig.suptitle(title, fontsize=16)
     ax.set_title(subtitle)
-    for line_value in np.unique(r[:, line_index]):
-        filtered_results = r[(line_value == r[:, line_index])]
-        fr_sort = filtered_results[:, x_index].argsort()
-        x = filtered_results[fr_sort, x_index]
-        y = 1 - filtered_results[fr_sort, 5]
-        ax.plot(x, y, label=f"{line_col} {line_value}")
+    x = r[:, 0]
+    y = 100 * (1 - r[:, 3].astype(float))
+    plt.bar(x, y)
     ax.set_xlabel(x_col)
-    ax.set_ylabel("Error")
+    ax.set_ylabel("Error %")
+    ax.set_ylim(4, 9)
     plt.legend()
 
-    filename = title_to_filename(title, "boosting")
+    filename = title_to_filename(title, "svm")
     if os.path.exists(filename):
         os.remove(filename)
     fig.tight_layout()
@@ -144,7 +139,7 @@ if __name__ == "main":
 
     print(results)
 
-    census_svc_results = train_permutations(
+    census_svc_results = train_permutations_multi(
         train_data=np_train_data_numeric,
         train_labels=np_train_label_numeric.ravel(),
         test_data=np_test_data_numeric,
@@ -154,12 +149,35 @@ if __name__ == "main":
         kernel_set=["linear", "poly", "rbf", "sigmoid"],
     )
 
-    census_svc_results = train_permutations_multi(
-        train_data=np_train_data_numeric,
-        train_labels=np_train_label_numeric.ravel(),
-        test_data=np_test_data_numeric,
-        test_labels=np_test_label_numeric.ravel(),
+    show_permutation_results_bar(
+        census_svc_results,
+        x_col="kernel",
+        title="Census Data SVM",
+        subtitle="Error Rates by Kernel Type",
+    )
+
+    (
+        mn_train_data,
+        mn_train_one_hot_labels,
+        mn_train_labels,
+        mn_test_images,
+        mn_test_one_hot_labels,
+        mn_test_labels,
+    ) = get_mnist_data_labels_neural(flatten_images=True)
+
+    mnist_svc_results = train_permutations_multi(
+        train_data=mn_train_data,
+        train_labels=mn_train_labels.ravel(),
+        test_data=mn_test_images,
+        test_labels=mn_test_labels.ravel(),
         cv_count=4,
         use_cv=False,
         kernel_set=["linear", "poly", "rbf", "sigmoid"],
+    )
+
+    show_permutation_results_bar(
+        mnist_svc_results,
+        x_col="kernel",
+        title="MNIST Image Data SVM",
+        subtitle="Error Rates by Kernel Type",
     )

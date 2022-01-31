@@ -11,5 +11,7 @@ def train_with_cv_mulit(kernel, train_data, train_labels, test_data, test_labels
     model.fit(train_data, train_labels)
     train_score = model.score(train_data, train_labels)
     test_score = model.score(test_data, test_labels)
+    print("\a")
+    print(f"{kernel}: train:{train_score*100.0:6.3f}, cv:{cv_score*100.0:6.3f}, test:{test_score*100.0:6.3f} ")
 
     return kernel, train_score, cv_score, test_score
