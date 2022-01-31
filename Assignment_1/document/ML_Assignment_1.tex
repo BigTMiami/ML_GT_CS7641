@@ -132,7 +132,7 @@ ADD DISCUSION ON BALANCE OF LABELS - CENSUS CAN GET GOOD SCORE WITH JUST 0
 \section{Decision Trees}
 Decision Trees. For the decision tree, you should implement or steal a decision tree algorithm (and by "implement or steal" I mean "steal"). Be sure to use some form of pruning. You are not required to use information gain (for example, there is something called the GINI index that is sometimes used) to split attributes, but you should describe whatever it is that you do use.
 
-\begin{figure}[htb]
+\begin{figure}[h]
 \centering
 \includegraphics[width=2.75in]{figures/Census_Data_decision_tree_cross_validation.png}
 \caption{Census Data Cross Validation.  The cross validation error starts to rise as the decision tree starts to over fit.  The best cross validation $\alpha$ value of 0.0000153 had a test accuracy of 95.24\%, which was very close to the actual best testing score of 95.30\%. }
@@ -149,7 +149,7 @@ I used the sklearn Cross Validation module for estimating the best solution with
 
 
 
-\begin{figure}[htb]
+\begin{figure}[h]
 \centering
 \includegraphics[width=2.75in, height=4in]{figures/Census_Data_decision_tree.png}
 \caption{Census Data Decision Tree:  The right side of the upper chart shows overfitting as the pruning is reduced and the number of nodes and tree depth increases.  An unusual aspect is the left side of the chart shows very high accuracy with very few nodes.  This stems from one feature being highly correlated to the labeled output.}
@@ -165,7 +165,7 @@ For the Census Data, Figure \ref{fig:census_data_decision_tree_cross_validation}
 The Census Data, shown in Figure \ref{fig:census_data_decision_tree},  mostly shows the expected curve.  Accuracy improves as nodes are added, to a point, then accuracy declines due to over fitting as more nodes are added.  Alpha, the pruning constant, leaves more nodes in the tree as it is decreased.  The Census Data also showed a unique characteristic.  One of its features (Capital Losses), showed a very high correlation with the labeled output, Income above \$50k.  Thus, a one node tree already showed 94\% accuracy.  Figure \ref{fig:census_data_decision_tree} shows this, with the the left side of the chart with few nodes already having a very high accuracy.  
 
 
-\begin{figure}[htb]
+\begin{figure}[h]
 \centering
 \includegraphics[width=2.75in]{figures/MNIST_Images_decision_tree_cross_validation.png}
 \caption{MNIST Images Cross Validation Error:  The chart shows continual reduction in training error, while the Cross Validation error reaches a minimum at an $\alpha$ of 0.0000542 and then starts to rise.  This was very close to the best $\alpha$ found using the testing data. }
@@ -174,7 +174,7 @@ The Census Data, shown in Figure \ref{fig:census_data_decision_tree},  mostly sh
 
 Figure \ref{fig:MNIST_Images_decision_tree_cross_validation}  shows the cross validation error curves for the MNIST image data.  The best cross validation $\alpha$ value of 0.0000762 had a test accuracy of 87.18\%,  while the actual best testing score of 88.54\%.  This was a larger gap than found in the Census data, but still relatively close.
 
-\begin{figure}[htb]
+\begin{figure}[h]
 \centering
 \includegraphics[width=2.75in]{figures/MNIST_Images_decision_tree_cross_validation.png}
 \caption{MNIST Images Cross Validation Error:  The chart shows continual reduction in training error, while the Cross Validation error reaches a minimum at an $\alpha$ of 0.0000542 and then starts to rise.  This was very close to the best $\alpha$ found using the testing data. }
@@ -191,7 +191,7 @@ For the neural network, I used PyTorch with two hidden layers, the Adam optimize
 
 In just the initial setup for the Census data, I quickly determined I would need to scale the data as the solver would often "blow up" with really large values.  I used the sklearn StandardScaler module, which removes the mean from each feature then applies a sigmoid function to create values from -1 to 1.  This is somewhat suspect for the categorical features, as there is not really a positional relationship, but it was still effective.  I also changed my cross validation process.  I used a 4 folds instead of 5 as I became more worried about the small amount of positive labels.  This also speeded up processing.  In addition, I created my own cross validation process because of my custom neural network. 
 
-\begin{figure}[htb]
+\begin{figure}[h]
 \centering
 \includegraphics[width=2.5in, height=2.5in]{figures/Census_Data_Neural_Network_Error_Rates_by_Layer_Size__Learning_Rate_census.png}
 \caption{Census Data Neural Network:  Built using PyTorch, linear functions and two hidden layers.  The lowest error is clearly shown for the smaller learning rate with the smaller network.   }
@@ -200,7 +200,7 @@ In just the initial setup for the Census data, I quickly determined I would need
 
 Figure \ref{fig:census_neural_network_start} clearly shows the preference for the smaller layer size and smaller learning rate, although the differences in absolute accuracy are quite small.  This is a victory still due to the very skewed dataset, with only ~6\% of the data being labeled positively.  The smaller layer size performance is straight out of the class lecture with regard to preferring simpler solutions.  I had expected larger layer sizes to be more effective.  The charts indicates that further exploration at the lower end was worthwhile.
 
-\begin{figure}[htb]
+\begin{figure}[h]
 \centering
 \includegraphics[width=2.5in, height=2.5in]{figures/Census_Data_Training_Error_Learning_Rate_chart_one.png}
 \caption{Census Data Neural Network Training Error:  It shows that the cross validation error was very close to the real test data error and a good guide for decision making.  }
@@ -209,7 +209,7 @@ Figure \ref{fig:census_neural_network_start} clearly shows the preference for th
 
 Figure \ref{fig:census_neural_network_error} shows one of the best performing settings from the initial review.  It shows that the cross validation error was very close to the real test data error and a good guide for decision making.  The chart also doesn't clearly have a movement up of the cross validation error, indicating more epoch training could be beneficial.
 
-\begin{figure}[htb]
+\begin{figure}[h]
 \centering
 \includegraphics[width=2.5in, height=2.5in]{figures/Census_Data_Neural_Network_Error_Rates_by_Layer_Size__Learning_Rate_census_v2.png}
 \caption{Census Data Neural Network:   Lower settings for layer size and learning rate were used in testing.   However, the absolute gains were very, very small, indicating the maximum performance for this dataset.   }
@@ -222,7 +222,7 @@ For the MNIST data, I created a different neural network topology.  The PyTorch 
 
 For this network, I used a different loss function, Cross Entropy Loss, to account for the single selection amongst one of ten output bits.  I also used the SGD optimizer with momentum. 
 
-\begin{figure}[htb]
+\begin{figure}[h]
 \centering
 \includegraphics[width=2.5in, height=2.5in]{figures/MNIST_Images_Neural_Network_Error_MNIST.png}
 \caption{MNIST Neural Network:  This uses the flattened images and no convolutional networks, with a cross validation using a 4 fold split.  The cross validation error closely tracking the test set error. The best accuracy reached was 97.27\%,  with 275 epoch of training.  }
@@ -233,7 +233,7 @@ Figure \ref{fig:MNIST_Error_neural_network} shows the result of the initial revi
 
 A key distinction in the MNIST dataset is that each feature has a spatial relationship to the others, in the form of a 2 dimensional grid.  It is a common practice to use convolutional networks to take advantage of that relationship.  I added two convolutional networks to the beginning of the network.  The first added 10 channels and used a kernel size of 5.  This means that for each 5 X 5 grid, a 5 X 5 filter is applied that multiplies each grid by the filter number, then sums the results.  This is moved over all parts of the image and allows for spatial features to be highlighted.  There is a different filter for each channel, with the different filters enhancing aspects of the grid, like edge detection.  Without padding the image, this will result in an output that has 4 less on each dimension, reducing the 28 X 28 grid to 24 X 24.   There is then a pooling layer that takes each 2 X 2 grid and choses the max value.  This reduces teach dimension by 2, changing the 24 X 24 grid to 12 X 12.  Another convolutional layer was added with 20 channels, leading to an output of 20 X 4 X 4.  This was then connected to the previous network.
 
-\begin{figure}[htb]
+\begin{figure}[h]
 \centering
 \includegraphics[width=2.5in, height=2.5in]{figures/MNIST_Images_CNN_Error_MNIST.png}
 \caption{MNIST Convolutional Neural Network:  This network used two convolutional layers, creating much better performance.  It reached the the same accuracy as the non CNN network in ~13 epochs, which took 275 epochs.  The overfitting is just starting to be seen around 100 epochs. }
@@ -244,49 +244,43 @@ The results were much better using the convolutional networks.  Figure \ref{fig:
 
 Overall, the CNN layers represent use of domain knowledge about image data and demonstrate the flexible power of neural networks.  
 
-Add cross entropy to census
-Add logit output for binary classification
-Add one hot input
-
 \section{Boosting}
-I chose to use the sklearn GradientBoostingClassifier for boosting.  I set the classifiers loss setting to "exponential" so that is reverts to the ADABoost algorithm. Without this setting, the classifier uses a more complex loss function and it does a gradient descent.  I chose the ADABoost because it was closer to the algorithm discussed in class.
 
-\begin{figure}[htb]
+\begin{figure}[h]
 \centering
 \includegraphics[width=2.5in, height=2.5in]{figures/Census_Data_Boosting_Estimator_Count_by_Max_Depth_boosting_1.png}
 \caption{Boosting Census Data Max Depth:  This shows error rates with different number of estimators and different Max Depths of the estimators.  Max features was set to 3. }
 \label{fig:boosting_census_1}
 \end{figure}
 
-Two of the key considerations when working with ensemble boosting is how many learners to use and how "weak" the learners are.  The Max Depth setting determines what the maximum depth of each of the estimator trees is.  By making this small, the learners become "weaker". Figure \ref{fig:boosting_census_1} shows how increasing depth up to 5 improves performance, but at 10 and over performance decreases and becomes erratic.  The change at higher levels is somewhat counter intuitive and may be linked to the max number of features for consideration, which was 3 for these tests.  The Figure also shows how adding estimators improves performance, although with diminishing returns.  A point to be tested later is that boosted learners are less susceptible to overfitting.
-
-\begin{figure}[htb]
+\begin{figure}[h]
 \centering
 \includegraphics[width=2.5in, height=2.5in]{figures/Census_Data_Boosting_Estimator_Count_by_Max_Depth_boosting_2.png}
 \caption{Boosting Census Data Max Features:  This shows error rates with different number of estimators vs the maximum number of features for each tree. Maximum depth was set to 3  }
-\label{fig:boosting_census_1}
+\label{fig:boosting_census_2}
 \end{figure}
 
-
-I then focused on reviewing the number of features setting.  The classifier will consider a maximum number of features chosen at random for each tree.  Generally, lower numbers make the learners weaker, high numbers may be better initially but allow for some overfitting. Figure \ref{fig:boosting_census_2}  shows that while considering up to 20 features is the best, 6 features is very close.
-
-
-\begin{figure}[htb]
+\begin{figure}[h]
 \centering
 \includegraphics[width=2.5in, height=2.5in]{figures/Census_Data_Boosting_Estimator_Count_by_Max_Depth_boosting_3.png}
 \caption{Boosting Census Data Max Features:  This shows over fitting after 800 estimator trees.  Maximum depth was set to 3  }
 \label{fig:boosting_census_3}
 \end{figure}
 
-Figure \ref{fig:boosting_census_3}  shows overfitting after 400 - 800 estimators, leading to a final review with lower feature counts focused on 80-320 estimators.
-
-
-\begin{figure}[htb]
+\begin{figure}[h]
 \centering
-\includegraphics[width=2.5in, height=2.5in]{figures/Census_Data_Boosting_Estimator_Count_by_Max_Depth_boosting_4.png}
+\includegraphics[width=2.5in, height=2.25in]{figures/Census_Data_Boosting_Estimator_Count_by_Max_Depth_boosting_4.png}
 \caption{Boosting Census Data Final Review:  Max Features of 5 at 200 estimators is found to be the best solution, achieving  95.65\% }
 \label{fig:boosting_census_4}
 \end{figure}
+
+I chose to use the sklearn GradientBoostingClassifier for boosting.  I set the classifiers loss setting to "exponential" so that is reverts to the ADABoost algorithm. Without this setting, the classifier uses a more complex loss function and it does a gradient descent.  I chose the ADABoost because it was closer to the algorithm discussed in class.
+
+Two of the key considerations when working with ensemble boosting is how many learners to use and how "weak" the learners are.  The Max Depth setting determines what the maximum depth of each of the estimator trees is.  By making this small, the learners become less accurate, but also less prone to overfitting. Figure \ref{fig:boosting_census_1} shows how increasing depth up to 5 improves performance, but at depths over 10 performance decreases and becomes erratic.  The change at higher levels is somewhat counter intuitive, as the individual learners are more accurate, but is likely due to the fact that the more accurate learners are overfitting.  Figure \ref{fig:boosting_census_1} also shows how adding estimators improves performance, although with diminishing returns.  
+
+I then focused on reviewing the number of features setting.  The classifier will consider a maximum number of features chosen at random for each tree.  Generally, lower numbers make the learners less accurate, high numbers may be better initially but allow for some overfitting. Figure \ref{fig:boosting_census_2}  shows that while considering up to 20 features is the best, 6 features is very close.
+
+Figure \ref{fig:boosting_census_3}  shows overfitting after 400 - 800 estimators, leading to a final review with lower feature counts focused on 80-320 estimators.
 
 Figure \ref{fig:boosting_census_4}  shows maximum features of 5 with 200 estimators is found to be the best solution, achieving  95.65\%.  This is better than the 95.30\% achieved with the decision tree, showing the power of using relatively weak learners in a thoughtful ensemble.
 
@@ -319,6 +313,10 @@ More review was then performed using a fixed number of estimators, 25. Figure \r
 
 The final review, seen in Figure \ref{fig:boosting_mnist_3}, shows the best performance with a max depth of 14 and max features of 38.  This achieved accuracy of 94.44\%, which is significantly better than the decision tree, but not as good as the neural network.  This makes sense, as the boosted ensemble is better able to deal with the large number of features, but still doesn't take optimum advantage of the spatial relationships in image files.
 
+
+\section{Support Vector Machines}
+
+I chose to use SVC from the sklearn library.  The key area for review was the use of different kernels.  For both datasets, the following kernels were tested: Linear, Polynomial for 3rd degree, Radial Bias Function, and Sigmoid.
 
 \section{References}
 \begin{tabular}{l p{2.75in}}
