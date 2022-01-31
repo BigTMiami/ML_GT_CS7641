@@ -105,7 +105,7 @@ def show_permutation_results_bar(results, x_col, title, subtitle):
     plt.bar(x, y)
     ax.set_xlabel(x_col)
     ax.set_ylabel("Error %")
-    ax.set_ylim(4, 9)
+    ax.set_ylim(0, 9)
     plt.legend()
 
     filename = title_to_filename(title, "svm")

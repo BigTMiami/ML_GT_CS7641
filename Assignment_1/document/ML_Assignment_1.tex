@@ -284,10 +284,10 @@ Figure \ref{fig:boosting_census_3}  shows overfitting after 400 - 800 estimators
 
 Figure \ref{fig:boosting_census_4}  shows maximum features of 5 with 200 estimators is found to be the best solution, achieving  95.65\%.  This is better than the 95.30\% achieved with the decision tree, showing the power of using relatively weak learners in a thoughtful ensemble.
 
-\begin{figure}[htb]
+\begin{figure}[h]
 \centering
-\includegraphics[width=2.5in, height=2.5in]{figures/MNIST_Boosted_Ensemble_boosting_1.png}
-\caption{MNIST Data Max Depth:  The shows overfitting occurs with relatively few estimators.  Maximum features was set to 28.  }
+\includegraphics[width=2.5in, height=2.25in]{figures/MNIST_Boosted_Ensemble_boosting_1.png}
+\caption{MNIST Data Max Depth:  The chart shows overfitting occuring with relatively few estimators.  Maximum features was set to 28.  }
 \label{fig:boosting_mnist_1}
 \end{figure}
 
@@ -295,18 +295,18 @@ For the MNIST data, I reviewed the estimator count vs max depth to begin with.  
 
 Figure \ref{fig:boosting_mnist_1}  shows overfitting with relatively few estimators.  An interesting point is that the over fitting then reaches a plateau, which may be from the interplay between maximum features and maximum depth.  It is also a bit hard to make sense of the max depth, as the best performing are the low of 2,4, and high of 15. 
 
-\begin{figure}[htb]
+\begin{figure}[h]
 \centering
-\includegraphics[width=2.5in, height=2.5in]{figures/MNIST_Boosted_Ensemble_boosting_2.png}
+\includegraphics[width=2.5in, height=2.25in]{figures/MNIST_Boosted_Ensemble_boosting_2.png}
 \caption{MNIST Data Max Feature vs Max Depth:  This shows that the best performing max depth is 15, then 4, then 2.  It is odd that the high and low maximum depths perform better. The number of estimators was 25.  }
 \label{fig:boosting_mnist_2}
 \end{figure}
 
 More review was then performed using a fixed number of estimators, 25. Figure \ref{fig:boosting_mnist_2} shows the result, with the best results being a max depth of 15, with more features generally performing better.
 
-\begin{figure}[htb]
+\begin{figure}[h]
 \centering
-\includegraphics[width=2.5in, height=2.5in]{figures/MNIST_Boosted_Ensemble_boosting_3.png}
+\includegraphics[width=2.25in, height=2.5in]{figures/MNIST_Boosted_Ensemble_boosting_3.png}
 \caption{MNIST Data Max Feature vs Max Depth:  The number of estimators was 25.  }
 \label{fig:boosting_mnist_3}
 \end{figure}
@@ -316,7 +316,23 @@ The final review, seen in Figure \ref{fig:boosting_mnist_3}, shows the best perf
 
 \section{Support Vector Machines}
 
-I chose to use SVC from the sklearn library.  The key area for review was the use of different kernels.  For both datasets, the following kernels were tested: Linear, Polynomial for 3rd degree, Radial Bias Function, and Sigmoid.
+I chose to use SVC from the sklearn library.  The key area for review was the use of different kernels.  For both datasets, the following kernels were tested: Linear, Polynomial with 3rd degree, Radial Bias Function, and Sigmoid.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=2.5in, height=2.5in]{figures/Census_Data_SVM_svm_1.png}
+\caption{Census Data SVM Classifier:  Error rate by different kernel types.  }
+\label{fig:svm_census_1}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=2.5in, height=2.5in]{figures/MNIST_Image_Data_SVM_svm_1.png}
+\caption{MNIST Images SVM Classfier:  Error rate by different kernel types.  }
+\label{fig:svm_mnist_1}
+\end{figure}
+
+The Census Data review is seen in Figure \ref{fig:svm_census_1}.  This shows that the Polynomial (3rd degree) and Radial Bias kernels performed the best.  The slight winner was Polynomial, with a test accuracy of  94.83\%.  A key thing to note is that the SVC solver took by far the longest time to solve of any of the different algorithms.  The dataset size, with almost 200,000 training instances is a significant challenge to this solution type.
 
 \section{References}
 \begin{tabular}{l p{2.75in}}
