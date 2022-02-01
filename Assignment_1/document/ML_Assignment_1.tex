@@ -332,7 +332,24 @@ I chose to use SVC from the sklearn library.  The key area for review was the us
 \label{fig:svm_mnist_1}
 \end{figure}
 
-The Census Data review is seen in Figure \ref{fig:svm_census_1}.  This shows that the Polynomial (3rd degree) and Radial Bias kernels performed the best.  The slight winner was Polynomial, with a test accuracy of  94.83\%.  A key thing to note is that the SVC solver took by far the longest time to solve of any of the different algorithms.  The dataset size, with almost 200,000 training instances is a significant challenge to this solution type.
+The Census Data review is seen in Figure \ref{fig:svm_census_1}.  This shows that the Polynomial (3rd degree) and Radial Bias kernels performed the best.  The slight winner was Polynomial, with a test accuracy of  94.83\%.  A key thing to note is that the SVC solver took the longest time to solve of any of the different algorithms.  The dataset size, with almost 200,000 training instances is a significant challenge to this solution type.
+
+\section{K-Nearest Neighbors}
+I used the sklearn KNeighborsClassifier for the K-Nearest Neighbors classifier, with key settings for review were the appropriate number of neighbors, the distance method and potentially weighting based on distance.  One thing to note is that K-Nearest Neighbors is a lazy learner, which in this application means that the fit function, which is used in the classifier models, is very fast, mostly just loading the training data.  It is on the predict function that the learner takes its time.
+
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=2.5in, height=2.5in]{figures/MNIST_Images_KNN_knn_1.png}
+\caption{MNIST Images KNN:  Error rate by different settings of K and different weightings of neighbors by distance.  Uniform means all neighbors are weighted the same, distance means neighbors are weighted by the inverse of distance.  }
+\label{fig:mnist_knn_1}
+\end{figure}
+
+Figure \ref{fig:mnist_knn_1} shows the MNIST KNN classifier.  The best value of K is 3 with neighbors weighted by inverse of distance.  Overall, this performs very well, with an overall accuracy of 97.17\%, the second best of all algorithms.  The strong performance for the MNIST images is driven by several things.  The algorithm effectively uses all the feature data, because all are calculated in the distance metric.  With all features being continuous and originally on the same scale, the distance metric is an effective way to compare all features.  The intuition is that similar numbers will be closer for each pixel \ feature than dissimilar ones.  For example, two zeros may not line up perfectly, but they will have closer pixels that a one and a zero.  Weighting neighbors by their distance enhances this, making less likely neighbors less impactful.   The small K also makes sense because numbers may be shifted in the image. For example, two images of a 1 with one shifted to the left would have a big distance, as almost no pixels are a match.  In this case, a large K would allow other images with a big distance to be selected, like a 0 which does cross over a 1 in several places.  A small K restricts this selection to more likely true matches.
+
+The weakness for this algorithm is that it really isn't generalizing, but is very dependent on its training set having similar examples to the test set.
+
+
 
 \section{References}
 \begin{tabular}{l p{2.75in}}
