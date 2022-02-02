@@ -100,6 +100,22 @@ class MNISTNetCNN(nn.Module):
             epoch_values.append([epoch, running_loss, train_acc, cv_acc, test_acc])
         return epoch_values
 
+    def fit(self):
+        for epoch in range(self.epoch_count):  # loop over the dataset multiple times
+            for inputs, labels in self.training_data_loader:
+                # zero the parameter gradients
+                self.optimizer.zero_grad()
+
+                # forward + backward + optimize
+                outputs = self(inputs)
+                loss = self.criterion(outputs, labels)
+                loss.backward()
+                self.optimizer.step()
+        return
+
+    def predict(self, X):
+        return self(X)
+
 
 if False:
     (

@@ -182,6 +182,18 @@ if __name__ == "main":
         data_classes,
     ) = get_census_data_and_labels(scale_numeric=True)
 
+    census_knn_results_4 = train_permutations_multi(
+        train_data=np_train_data_numeric,
+        train_labels=np_train_label_numeric.ravel(),
+        test_data=np_test_data_numeric,
+        test_labels=np_test_label_numeric.ravel(),
+        cv_count=4,
+        use_cv=False,
+        n_neighbors_set=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+        weights_set=["uniform"],
+        metric_set=["minkowski", "hamming", "manhattan"],
+    )
+
     census_knn_results_3 = train_permutations_multi(
         train_data=np_train_data_numeric,
         train_labels=np_train_label_numeric.ravel(),

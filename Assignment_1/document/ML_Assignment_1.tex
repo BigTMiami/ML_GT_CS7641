@@ -337,6 +337,15 @@ The Census Data review is seen in Figure \ref{fig:svm_census_1}.  This shows tha
 \section{K-Nearest Neighbors}
 I used the sklearn KNeighborsClassifier for the K-Nearest Neighbors classifier, with key settings for review were the appropriate number of neighbors, the distance method and potentially weighting based on distance.  One thing to note is that K-Nearest Neighbors is a lazy learner, which in this application means that the fit function, which is used in the classifier models, is very fast, mostly just loading the training data.  It is on the predict function that the learner takes its time.
 
+\begin{figure}[h]
+\centering
+\includegraphics[width=2.5in, height=2.5in]{figures/Census_Data_KNN_knn_1.png}
+\caption{Census KNN:  Error rate by different settings of K and different distance formulas.  Neighbors were not weighted by distance.  }
+\label{fig:census_knn_1}
+\end{figure}
+
+Figure \ref{fig:census_knn_1} shows the Census KNN classifier.  Manhattan Distance worked the best, with larger values of K for more neighbors working better.
+
 
 \begin{figure}[h]
 \centering
