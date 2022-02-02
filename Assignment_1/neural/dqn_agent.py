@@ -186,12 +186,14 @@ class DQNAgent:
 
         return epoch_loss, epoch_accuracy
 
-    def fit(self):
+    def fit(self, X, y):
         for epoch_index in range(self.epoch_count):
+            print(f"Fit epoch:{epoch_index}")
             batch_indexes = self.get_training_batch_indexes()
             self.train_epoch(batch_indexes)
 
     def predict(self, X):
+        X = t.tensor(X.astype(np.float32), device=self.model.device)
         self.model.eval()
         with t.no_grad():
             computed_raw = self.model.forward(X)
