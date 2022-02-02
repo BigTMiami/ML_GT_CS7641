@@ -152,25 +152,6 @@ def show_permutation_results_bar(results, x_col, line_col, title, subtitle):
 if __name__ == "main":
 
     (
-        train_data_one_hot,
-        train_label_one_hot,
-        test_data_one_hot,
-        test_label_one_hot,
-    ) = get_census_data_and_labels_one_hot()
-
-    census_knn_results_one_hot = train_permutations_multi(
-        train_data=train_data_one_hot,
-        train_labels=train_label_one_hot.ravel(),
-        test_data=test_data_one_hot,
-        test_labels=test_label_one_hot.ravel(),
-        cv_count=4,
-        use_cv=False,
-        n_neighbors_set=[15, 17, 21, 25, 31],
-        weights_set=["uniform", "distance"],
-        metric_set=["minkowski"],
-    )
-
-    (
         df_train_data,
         df_train_label,
         np_train_data_numeric,
@@ -192,6 +173,55 @@ if __name__ == "main":
         n_neighbors_set=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
         weights_set=["uniform"],
         metric_set=["minkowski", "hamming", "manhattan"],
+    )
+
+    show_permutation_results_bar(
+        census_knn_results_4,
+        x_col="n_neighbors",
+        line_col="metric",
+        title="Census Data KNN",
+        subtitle="Error Rates by K neighbors, Distance Weighting",
+    )
+
+    census_knn_results_5 = train_permutations_multi(
+        train_data=np_train_data_numeric,
+        train_labels=np_train_label_numeric.ravel(),
+        test_data=np_test_data_numeric,
+        test_labels=np_test_label_numeric.ravel(),
+        cv_count=4,
+        use_cv=False,
+        n_neighbors_set=[8, 9, 10, 11, 12, 13, 14, 15],
+        weights_set=["uniform", "distance"],
+        metric_set=["manhattan"],
+    )
+
+    show_permutation_results_bar(
+        census_knn_results_5,
+        x_col="n_neighbors",
+        line_col="weights",
+        title="Census Data KNN",
+        subtitle="Error Rates by K neighbors, Distance Weighting",
+    )
+
+    (
+        census_train_data_one_hot,
+        census_train_label_one_hot,
+        census_test_data_one_hot,
+        census_test_label_one_hot,
+    ) = get_census_data_and_labels_one_hot()
+
+    census_knn_results_one_hot = train_permutations_multi(
+        train_data=census_train_data_one_hot,
+        train_labels=census_train_label_one_hot.ravel(),
+        test_data=census_test_data_one_hot,
+        test_labels=census_test_label_one_hot.ravel(),
+        cv_count=4,
+        use_cv=False,
+        n_neighbors_set=[14, 15, 16, 17],
+        weights_set=[
+            "uniform",
+        ],
+        metric_set=["manhattan", "hamming"],
     )
 
     census_knn_results_3 = train_permutations_multi(

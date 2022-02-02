@@ -1,6 +1,7 @@
 from Assignment_1.prep_census_data import get_census_data_and_labels
 from Assignment_1.mnist_data_prep import get_mnist_data_labels_neural
 from Assignment_1.neural.mnist_network_model_cnn import MNISTNetCNN
+from Assignment_1.neural.dqn_agent import DQNAgent
 from sklearn import tree
 import torch as t
 from time import time
@@ -72,3 +73,18 @@ if __name__ == "main":
     results.append("Decision Tree", "MNIST", "ccp_alpha = 0.0000762", acc, fit_time, predict_time)
 
     # Neural Network
+    network_learning_rate = 0.000001
+    layer_1_count = 16
+    epoch_count = 600
+
+    census_net = DQNAgent(
+        network_learning_rate=network_learning_rate,
+        layer_1_count=layer_1_count,
+        training_data=census_train_data_numeric,
+        training_labels=census_train_label_numeric
+        test_data=None,
+        test_labels=None,
+        epoch_count=None,
+    )
+
+    mnist_net = MNISTNetCNN()

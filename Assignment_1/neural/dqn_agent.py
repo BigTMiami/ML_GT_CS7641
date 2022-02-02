@@ -185,3 +185,15 @@ class DQNAgent:
         epoch_accuracy = epoch_accuracy / len(batch_indexes)
 
         return epoch_loss, epoch_accuracy
+
+    def fit(self):
+        for epoch_index in range(self.epoch_count):
+            batch_indexes = self.get_training_batch_indexes()
+            self.train_epoch(batch_indexes)
+
+    def predict(self, X):
+        self.model.eval()
+        with t.no_grad():
+            computed_raw = self.model.forward(X)
+            computed_labels = t.where(computed_raw < 0.5, 0, 1)
+        return computed_labels

@@ -344,8 +344,9 @@ I used the sklearn KNeighborsClassifier for the K-Nearest Neighbors classifier, 
 \label{fig:census_knn_1}
 \end{figure}
 
-Figure \ref{fig:census_knn_1} shows the Census KNN classifier.  Manhattan Distance worked the best, with larger values of K for more neighbors working better.
+Figure \ref{fig:census_knn_1} shows the Census KNN classifier.  Manhattan Distance worked the best, with larger values of K for more neighbors working better.  With a mix of continuous (Age) features and discrete (Sex, Working Status), distance or similarity is tricky to calculate.  With discrete values encoded as numbers, a false sense of dissimilarity can occur.  For instance, a category with 4 values - Employed, Un-employed, Student, Retired might be encoded to 0,1,2,3.  When calculating feature distance between an instance with Employed (0) to Un-employed (1), the distance would be 1, but to Retired(3) would be 3.  However, this is not a good measure of dissimilarity in this case.  Hamming distance, which just calculates distance with either the values match or don't match, would seem to be a better measure, but actually performs the worst of the three measures.  A key issue is that the 40 features do not have weightings, so each feature is valued the same.  This is strongly contrasted with a decision tree, where only the features that provide the most information gain are used.
 
+Another round of review was done, checking the K values in a higher range, and considering weighting neighbors by their distance.  This is seen in FIGURE
 
 \begin{figure}[h]
 \centering
@@ -358,7 +359,8 @@ Figure \ref{fig:mnist_knn_1} shows the MNIST KNN classifier.  The best value of 
 
 The weakness for this algorithm is that it really isn't generalizing, but is very dependent on its training set having similar examples to the test set.
 
-
+\section{Summary}
+A last review 
 
 \section{References}
 \begin{tabular}{l p{2.75in}}

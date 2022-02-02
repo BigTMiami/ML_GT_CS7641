@@ -90,3 +90,22 @@ census_knn_results_4 = [
     (10, "uniform", "hamming", 0, 0.0, 0.9457809586816623),
     (10, "uniform", "manhattan", 0, 0.0, 0.9477356107535936),
 ]
+
+census_knn_results_5 = [
+    (8, "uniform", "manhattan", 0, 0.0, 0.9475652051883483),
+    (8, "distance", "manhattan", 0, 0.0, 0.9464425332290852),
+    (9, "uniform", "manhattan", 0, 0.0, 0.9475852529019065),
+    (9, "distance", "manhattan", 0, 0.0, 0.946793368216355),
+    (10, "uniform", "manhattan", 0, 0.0, 0.9477356107535936),
+    (10, "distance", "manhattan", 0, 0.0, 0.9472344179146368),
+    (11, "uniform", "manhattan", 0, 0.0, 0.94777570618071),
+    (11, "distance", "manhattan", 0, 0.0, 0.9472043463442994),
+    (12, "uniform", "manhattan", 0, 0.0, 0.9476253483290231),
+    (12, "distance", "manhattan", 0, 0.0, 0.9475852529019065),
+    (13, "uniform", "manhattan", 0, 0.0, 0.9479160401756179),
+    (13, "distance", "manhattan", 0, 0.0, 0.9475150859044525),
+    (14, "uniform", "manhattan", 0, 0.0, 0.9476854914696978),
+    (14, "distance", "manhattan", 0, 0.0, 0.9476353721858022),
+    (15, "uniform", "manhattan", 0, 0.0, 0.9480864457408632),
+    (15, "distance", "manhattan", 0, 0.0, 0.9477556584671518),
+]
