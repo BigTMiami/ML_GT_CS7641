@@ -18,7 +18,7 @@ results = [
         0.7877399921417236,
     ],
     [
-        "Boosting ",
+        "Boosting",
         "Census",
         "n_estimators=200, max_depth=3, max_features=5",
         95.57947916040176,
@@ -26,15 +26,15 @@ results = [
         0.2826659679412842,
     ],
     [
-        "Boosting ",
+        "Boosting",
         "MNIST",
         "n_estimators=25, max_depth=15, max_features=38",
         94.04,
         122.70928597450256,
         0.27556800842285156,
     ],
-    ["Support Vector Machine ", "Census", "kernel=poly", 94.83370421603416, 1768.4988389015198, 86.27147483825684],
-    ["Support Vector Machine ", "MNIST", "kernel=rbf", 97.92, 160.0279140472412, 61.761529207229614],
+    ["Support Vector Machine", "Census", "kernel=poly", 94.83370421603416, 1768.4988389015198, 86.27147483825684],
+    ["Support Vector Machine", "MNIST", "kernel=rbf", 97.92, 160.0279140472412, 61.761529207229614],
     [
         "K Nearest Neighbors",
         "Census",

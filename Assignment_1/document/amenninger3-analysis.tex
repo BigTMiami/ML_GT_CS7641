@@ -113,7 +113,7 @@ Assignment 1
 \maketitle
 
 \begin{abstract}
-FILL IN?
+This paper reviews five classifying algorithms with two different datasets. The algorithms reviewed are Decision Trees, Neural Networks, Boosting, Support Vector Machines (SVM), and K Nearest Neighbors (KNN).  The first dataset is a 1994-1995 Census Data set with an income threshold label.  The second is a set of hand drawn digit images with the actual digit labels.  The tunings and performance are reviewed for each dataset and algorithm.  The report concludes with a review of the relative strengths and weaknesses of the algorithms for the datasets.
 \end{abstract}
 
 \section{Introduction}
@@ -125,12 +125,9 @@ The first data set is from 1994 and 1995 current population surveys conducted by
 
 There are 40 usable features, with both continuous features, such as age, and discrete, such as married status or sex.  The training set has 199,523 instances and the test set has 99,762 instances.  Because many of the features in the file are string based, I created transformed instances using the sklearn preprocessing LabelEncoder to translate discrete string values into consistent numeric values.  This was necessary for algorithms that only used numeric features. I chose this data set because it seemed relatively large and I expect somewhat noisy with a smallish number of features.  
 
-The second data set is The MNIST Database of Handwritten Digits [2].  This consists of instances of 28 X 28 greyscale images of the digits 0-9.  The only transformation needed was that each of these images was flattened, creating 784 features, one for each pixel.  There are 60,000 training instances and 10,000 test instances.  I chose this because it is a good comparison to the first data set, with a very different type of data (images), which leads to significantly more features (784).  In addition, each of the features can be thought of as related to each other, as they are all positional in a two dimensional grid, while the first data set features do not have any necessary relation between themselves ie:  age is not related to sex.  
-
-ADD DISCUSION ON BALANCE OF LABELS - CENSUS CAN GET GOOD SCORE WITH JUST 0
+The second data set is The MNIST Database of Handwritten Digits [2].  This consists of instances of 28 X 28 greyscale images of the digits 0-9.  One transformation performed was that the values where scaled to 0 to 1, from 0 to 255.  For all but the neural network algorithm,  the images were flattened, creating 784 features, one for each pixel.  There are 60,000 training instances and 10,000 test instances.  I chose this because it is a good comparison to the first data set, with a very different type of data (images), which leads to significantly more features (784).  In addition, each of the features can be thought of as related to each other, as they are all positional in a two dimensional grid, while the first data set features do not have any necessary relation between themselves ie:  age is not related to sex.  
 
 \section{Decision Trees}
-Decision Trees. For the decision tree, you should implement or steal a decision tree algorithm (and by "implement or steal" I mean "steal"). Be sure to use some form of pruning. You are not required to use information gain (for example, there is something called the GINI index that is sometimes used) to split attributes, but you should describe whatever it is that you do use.
 
 \begin{figure}[h]
 \centering
@@ -147,8 +144,6 @@ sklearn also uses a randomizing element, which means that given the same set of 
 
 I used the sklearn Cross Validation module for estimating the best solution without using the test data as described in more detail below.
 
-
-
 \begin{figure}[h]
 \centering
 \includegraphics[width=2.75in, height=4in]{figures/Census_Data_decision_tree.png}
@@ -163,7 +158,6 @@ For both data sets, I also performed cross validation to use the training set on
 For the Census Data, Figure \ref{fig:census_data_decision_tree_cross_validation} shows the use of cross validation to estimate the best solution, in this case setting for $\alpha$, without using the test data.   The best cross validation $\alpha$ value of 0.0000153 had a test accuracy of 95.24\%, which was very close to the actual best testing score of 95.30\%.  Cross Validation provides a powerful tool for evaluation a given training set without reference to test data when available.
 
 The Census Data, shown in Figure \ref{fig:census_data_decision_tree},  mostly shows the expected curve.  Accuracy improves as nodes are added, to a point, then accuracy declines due to over fitting as more nodes are added.  Alpha, the pruning constant, leaves more nodes in the tree as it is decreased.  The Census Data also showed a unique characteristic.  One of its features (Capital Losses), showed a very high correlation with the labeled output, Income above \$50k.  Thus, a one node tree already showed 94\% accuracy.  Figure \ref{fig:census_data_decision_tree} shows this, with the the left side of the chart with few nodes already having a very high accuracy.  
-
 
 \begin{figure}[h]
 \centering
@@ -371,7 +365,27 @@ Figure \ref{fig:mnist_knn_1} shows the MNIST KNN classifier.  The best value of 
 The weakness for this algorithm is that it really isn't generalizing, but is very dependent on its training set having similar examples to the test set.
 
 \section{Summary}
-A last review 
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=2.5in, height=2.5in]{figures/Overall_Algorithm_ReviewComparison_of_Accuracy_.png}
+\caption{Overall Accuracy Comparison:  FILL IN.  }
+\label{fig:overall_accuracy}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=2.5in, height=2.5in]{figures/Overall_Algorithm_ReviewComparison_of_Learning_Time_.png}
+\caption{Learning Time Comparison:  FILL IN.  }
+\label{fig:overall_learning_time}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=2.5in, height=2.5in]{figures/Overall_Algorithm_ReviewComparison_of_Prediction_Time_.png}
+\caption{Prediction Time Comparison:  FILL IN.  }
+\label{fig:overall_prediction_time}
+\end{figure}
 
 \section{References}
 \begin{tabular}{l p{2.75in}}
