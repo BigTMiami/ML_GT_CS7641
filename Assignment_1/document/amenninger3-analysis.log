@@ -1,0 +1,520 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.4.7)  6 FEB 2022 16:11
+entering extended mode
+ restricted \write18 enabled.
+ file:line:error style messages enabled.
+ %&-line parsing enabled.
+**amenninger3-analysis.tex
+(./amenninger3-analysis.tex
+LaTeX2e <2020-02-02> patch level 5
+L3 programming layer <2020-03-06>
+(/usr/local/texlive/2020/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2019/12/20 v1.4l Standard LaTeX document class
+(/usr/local/texlive/2020/texmf-dist/tex/latex/base/size10.clo
+File: size10.clo 2019/12/20 v1.4l Standard LaTeX file (size option)
+)
+\c@part=\count167
+\c@section=\count168
+\c@subsection=\count169
+\c@subsubsection=\count170
+\c@paragraph=\count171
+\c@subparagraph=\count172
+\c@figure=\count173
+\c@table=\count174
+\abovecaptionskip=\skip47
+\belowcaptionskip=\skip48
+\bibindent=\dimen134
+) (./aaai21.sty
+Conference Style for AAAI for LaTeX 2e -- version for the AAAI-21 conference - 
+MODIFIED
+\titlebox=\skip49
+) (/usr/local/texlive/2020/texmf-dist/tex/latex/psnfss/times.sty
+Package: times 2005/04/12 PSNFSS-v9.2a (SPQR) 
+)
+(/usr/local/texlive/2020/texmf-dist/tex/latex/psnfss/helvet.sty
+Package: helvet 2005/04/12 PSNFSS-v9.2a (WaS) 
+
+(/usr/local/texlive/2020/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks15
+))
+(/usr/local/texlive/2020/texmf-dist/tex/latex/psnfss/courier.sty
+Package: courier 2005/04/12 PSNFSS-v9.2a (WaS) 
+)
+(/usr/local/texlive/2020/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip16
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+(/usr/local/texlive/2020/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2019/11/30 v1.2a Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/texlive/2020/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2019/11/30 v1.4a Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/texlive/2020/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+)
+(/usr/local/texlive/2020/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 105.
+
+(/usr/local/texlive/2020/texmf-dist/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
+))
+\Gin@req@height=\dimen135
+\Gin@req@width=\dimen136
+)
+(/usr/local/texlive/2020/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2020/01/20 v2.17e AMS math features
+\@mathmargin=\skip50
+
+For additional information on amsmath, use the `?' option.
+(/usr/local/texlive/2020/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2000/06/29 v2.01 AMS text
+
+(/usr/local/texlive/2020/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks16
+\ex@=\dimen137
+))
+(/usr/local/texlive/2020/texmf-dist/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen138
+)
+(/usr/local/texlive/2020/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 2016/03/08 v2.02 operator names
+)
+\inf@bad=\count175
+LaTeX Info: Redefining \frac on input line 227.
+\uproot@=\count176
+\leftroot@=\count177
+LaTeX Info: Redefining \overline on input line 389.
+\classnum@=\count178
+\DOTSCASE@=\count179
+LaTeX Info: Redefining \ldots on input line 486.
+LaTeX Info: Redefining \dots on input line 489.
+LaTeX Info: Redefining \cdots on input line 610.
+\Mathstrutbox@=\box45
+\strutbox@=\box46
+\big@size=\dimen139
+LaTeX Font Info:    Redeclaring font encoding OML on input line 733.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 734.
+\macc@depth=\count180
+\c@MaxMatrixCols=\count181
+\dotsspace@=\muskip17
+\c@parentequation=\count182
+\dspbrk@lvl=\count183
+\tag@help=\toks17
+\row@=\count184
+\column@=\count185
+\maxfields@=\count186
+\andhelp@=\toks18
+\eqnshift@=\dimen140
+\alignsep@=\dimen141
+\tagshift@=\dimen142
+\tagwidth@=\dimen143
+\totwidth@=\dimen144
+\lineht@=\dimen145
+\@envbody=\toks19
+\multlinegap=\skip51
+\multlinetaggap=\skip52
+\mathdisplay@stack=\toks20
+LaTeX Info: Redefining \[ on input line 2859.
+LaTeX Info: Redefining \] on input line 2860.
+)
+(/usr/local/texlive/2020/texmf-dist/tex/latex/natbib/natbib.sty
+Package: natbib 2010/09/13 8.31b (PWD, AO)
+\bibhang=\skip53
+\bibsep=\skip54
+LaTeX Info: Redefining \cite on input line 694.
+\c@NAT@ctr=\count187
+)
+(/usr/local/texlive/2020/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2020/01/03 v3.4h Customizing captions (AR)
+
+(/usr/local/texlive/2020/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2020/01/03 v1.8h caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 61.
+\captionmargin=\dimen146
+\captionmargin@=\dimen147
+\captionwidth=\dimen148
+\caption@tempdima=\dimen149
+\caption@indent=\dimen150
+\caption@parindent=\dimen151
+\caption@hangindent=\dimen152
+Package caption Info: Standard document class detected.
+)
+\c@caption@flags=\count188
+\c@continuedfloat=\count189
+)
+(/usr/local/texlive/2020/texmf-dist/tex/latex/l3backend/l3backend-pdfmode.def
+File: l3backend-pdfmode.def 2020-03-12 L3 backend support: PDF mode
+\l__kernel_color_stack_int=\count190
+\l__pdf_internal_box=\box47
+)
+(./amenninger3-analysis.aux)
+\openout1 = `amenninger3-analysis.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 111.
+LaTeX Font Info:    ... okay on input line 111.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 111.
+LaTeX Font Info:    ... okay on input line 111.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 111.
+LaTeX Font Info:    ... okay on input line 111.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 111.
+LaTeX Font Info:    ... okay on input line 111.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 111.
+LaTeX Font Info:    ... okay on input line 111.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 111.
+LaTeX Font Info:    ... okay on input line 111.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 111.
+LaTeX Font Info:    ... okay on input line 111.
+LaTeX Font Info:    Trying to load font information for OT1+ptm on input line 1
+11.
+
+(/usr/local/texlive/2020/texmf-dist/tex/latex/psnfss/ot1ptm.fd
+File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
+)
+(/usr/local/texlive/2020/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count191
+\scratchdimen=\dimen153
+\scratchbox=\box48
+\nofMPsegments=\count192
+\nofMParguments=\count193
+\everyMPshowfont=\toks21
+\MPscratchCnt=\count194
+\MPscratchDim=\dimen154
+\MPnumerator=\count195
+\makeMPintoPDFobject=\count196
+\everyMPtoPDFconversion=\toks22
+) (/usr/local/texlive/2020/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+85.
+
+(/usr/local/texlive/2020/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: End \AtBeginDocument code.
+\titlearea=\box49
+\actualheight=\skip55
+
+Underfull \vbox (badness 10000) detected at line 113
+ []
+
+LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 1
+24.
+(/usr/local/texlive/2020/texmf-dist/tex/latex/psnfss/ts1ptm.fd
+File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
+)
+<figures/Census_Data_decision_tree_cross_validation.png, id=1, 274.626pt x 182.
+8431pt>
+File: figures/Census_Data_decision_tree_cross_validation.png Graphic file (type
+ png)
+<use figures/Census_Data_decision_tree_cross_validation.png>
+Package pdftex.def Info: figures/Census_Data_decision_tree_cross_validation.png
+  used on input line 134.
+(pdftex.def)             Requested size: 198.7425pt x 132.31929pt.
+ [1{/usr/local/texlive/2020/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
+
+
+
+ <./figures/Census_Data_decision_tree_cross_validation.png>]
+<figures/Census_Data_decision_tree.png, id=12, 281.1303pt x 536.9661pt>
+File: figures/Census_Data_decision_tree.png Graphic file (type png)
+<use figures/Census_Data_decision_tree.png>
+Package pdftex.def Info: figures/Census_Data_decision_tree.png  used on input l
+ine 149.
+(pdftex.def)             Requested size: 198.74167pt x 289.08887pt.
+<figures/MNIST_Images_decision_tree.png, id=13, 281.1303pt x 536.9661pt>
+File: figures/MNIST_Images_decision_tree.png Graphic file (type png)
+<use figures/MNIST_Images_decision_tree.png>
+Package pdftex.def Info: figures/MNIST_Images_decision_tree.png  used on input 
+line 164.
+(pdftex.def)             Requested size: 198.7425pt x 379.60172pt.
+<figures/MNIST_Images_decision_tree_cross_validation.png, id=14, 274.626pt x 18
+2.8431pt>
+File: figures/MNIST_Images_decision_tree_cross_validation.png Graphic file (typ
+e png)
+<use figures/MNIST_Images_decision_tree_cross_validation.png>
+Package pdftex.def Info: figures/MNIST_Images_decision_tree_cross_validation.pn
+g  used on input line 173.
+(pdftex.def)             Requested size: 198.7425pt x 132.31929pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[2 <./figures/Census_Data_decision_tree.png> <./figures/MNIST_Images_decision_t
+ree.png>]
+<figures/Census_Data_Neural_Network_Error_Rates_by_Layer_Size__Learning_Rate_ce
+nsus.png, id=20, 293.4162pt x 357.7365pt>
+File: figures/Census_Data_Neural_Network_Error_Rates_by_Layer_Size__Learning_Ra
+te_census.png Graphic file (type png)
+<use figures/Census_Data_Neural_Network_Error_Rates_by_Layer_Size__Learning_Rat
+e_census.png>
+Package pdftex.def Info: figures/Census_Data_Neural_Network_Error_Rates_by_Laye
+r_Size__Learning_Rate_census.png  used on input line 188.
+(pdftex.def)             Requested size: 180.68047pt x 180.67459pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<figures/Census_Data_Training_Error_Learning_Rate_chart_one.png, id=21, 310.761
+pt x 357.7365pt>
+File: figures/Census_Data_Training_Error_Learning_Rate_chart_one.png Graphic fi
+le (type png)
+<use figures/Census_Data_Training_Error_Learning_Rate_chart_one.png>
+Package pdftex.def Info: figures/Census_Data_Training_Error_Learning_Rate_chart
+_one.png  used on input line 197.
+(pdftex.def)             Requested size: 180.67775pt x 180.67459pt.
+<figures/Census_Data_Neural_Network_Error_Rates_by_Layer_Size__Learning_Rate_ce
+nsus_v2.png, id=22, 290.5254pt x 357.7365pt>
+File: figures/Census_Data_Neural_Network_Error_Rates_by_Layer_Size__Learning_Ra
+te_census_v2.png Graphic file (type png)
+<use figures/Census_Data_Neural_Network_Error_Rates_by_Layer_Size__Learning_Rat
+e_census_v2.png>
+Package pdftex.def Info: figures/Census_Data_Neural_Network_Error_Rates_by_Laye
+r_Size__Learning_Rate_census_v2.png  used on input line 206.
+(pdftex.def)             Requested size: 180.67801pt x 180.67459pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[3 <./figures/MNIST_Images_decision_tree_cross_validation.png> <./figures/Censu
+s_Data_Neural_Network_Error_Rates_by_Layer_Size__Learning_Rate_census.png> <./f
+igures/Census_Data_Training_Error_Learning_Rate_chart_one.png>]
+<figures/MNIST_Images_Neural_Network_Error_MNIST.png, id=29, 281.1303pt x 357.7
+365pt>
+File: figures/MNIST_Images_Neural_Network_Error_MNIST.png Graphic file (type pn
+g)
+<use figures/MNIST_Images_Neural_Network_Error_MNIST.png>
+Package pdftex.def Info: figures/MNIST_Images_Neural_Network_Error_MNIST.png  u
+sed on input line 219.
+(pdftex.def)             Requested size: 180.67775pt x 180.67459pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<figures/MNIST_Images_CNN_Error_MNIST.png, id=30, 281.1303pt x 357.7365pt>
+File: figures/MNIST_Images_CNN_Error_MNIST.png Graphic file (type png)
+<use figures/MNIST_Images_CNN_Error_MNIST.png>
+Package pdftex.def Info: figures/MNIST_Images_CNN_Error_MNIST.png  used on inpu
+t line 230.
+(pdftex.def)             Requested size: 180.67775pt x 180.67459pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<figures/Census_Data_Boosting_Estimator_Count_by_Max_Depth_boosting_1.png, id=3
+1, 302.0886pt x 357.7365pt>
+File: figures/Census_Data_Boosting_Estimator_Count_by_Max_Depth_boosting_1.png 
+Graphic file (type png)
+<use figures/Census_Data_Boosting_Estimator_Count_by_Max_Depth_boosting_1.png>
+Package pdftex.def Info: figures/Census_Data_Boosting_Estimator_Count_by_Max_De
+pth_boosting_1.png  used on input line 243.
+(pdftex.def)             Requested size: 180.67836pt x 180.67459pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<figures/Census_Data_Boosting_Estimator_Count_by_Max_Depth_boosting_2.png, id=3
+2, 310.0383pt x 357.7365pt>
+File: figures/Census_Data_Boosting_Estimator_Count_by_Max_Depth_boosting_2.png 
+Graphic file (type png)
+<use figures/Census_Data_Boosting_Estimator_Count_by_Max_Depth_boosting_2.png>
+Package pdftex.def Info: figures/Census_Data_Boosting_Estimator_Count_by_Max_De
+pth_boosting_2.png  used on input line 250.
+(pdftex.def)             Requested size: 180.6786pt x 180.67459pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<figures/Census_Data_Boosting_Estimator_Count_by_Max_Depth_boosting_3.png, id=3
+3, 312.9291pt x 357.7365pt>
+File: figures/Census_Data_Boosting_Estimator_Count_by_Max_Depth_boosting_3.png 
+Graphic file (type png)
+<use figures/Census_Data_Boosting_Estimator_Count_by_Max_Depth_boosting_3.png>
+Package pdftex.def Info: figures/Census_Data_Boosting_Estimator_Count_by_Max_De
+pth_boosting_3.png  used on input line 257.
+(pdftex.def)             Requested size: 180.6777pt x 180.67459pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<figures/Census_Data_Boosting_Estimator_Count_by_Max_Depth_boosting_4.png, id=3
+4, 315.8199pt x 357.7365pt>
+File: figures/Census_Data_Boosting_Estimator_Count_by_Max_Depth_boosting_4.png 
+Graphic file (type png)
+<use figures/Census_Data_Boosting_Estimator_Count_by_Max_Depth_boosting_4.png>
+Package pdftex.def Info: figures/Census_Data_Boosting_Estimator_Count_by_Max_De
+pth_boosting_4.png  used on input line 264.
+(pdftex.def)             Requested size: 180.67459pt x 162.6066pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [4 <./figures/Census_Data_Neural_Network_Error_Rates_by_Layer_Size__Learning_R
+ate_census_v2.png> <./figures/MNIST_Images_Neural_Network_Error_MNIST.png>]
+<figures/MNIST_Boosted_Ensemble_boosting_1.png, id=40, 295.5843pt x 357.7365pt>
+
+File: figures/MNIST_Boosted_Ensemble_boosting_1.png Graphic file (type png)
+<use figures/MNIST_Boosted_Ensemble_boosting_1.png>
+Package pdftex.def Info: figures/MNIST_Boosted_Ensemble_boosting_1.png  used on
+ input line 281.
+(pdftex.def)             Requested size: 180.676pt x 162.6066pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<figures/MNIST_Boosted_Ensemble_boosting_2.png, id=41, 290.5254pt x 357.0138pt>
+
+File: figures/MNIST_Boosted_Ensemble_boosting_2.png Graphic file (type png)
+<use figures/MNIST_Boosted_Ensemble_boosting_2.png>
+Package pdftex.def Info: figures/MNIST_Boosted_Ensemble_boosting_2.png  used on
+ input line 292.
+(pdftex.def)             Requested size: 180.67801pt x 162.6104pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<figures/MNIST_Boosted_Ensemble_boosting_3.png, id=42, 290.5254pt x 357.0138pt>
+
+File: figures/MNIST_Boosted_Ensemble_boosting_3.png Graphic file (type png)
+<use figures/MNIST_Boosted_Ensemble_boosting_3.png>
+Package pdftex.def Info: figures/MNIST_Boosted_Ensemble_boosting_3.png  used on
+ input line 301.
+(pdftex.def)             Requested size: 162.60889pt x 180.68004pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<figures/Census_Data_SVM_svm_1.png, id=43, 281.853pt x 357.7365pt>
+File: figures/Census_Data_SVM_svm_1.png Graphic file (type png)
+<use figures/Census_Data_SVM_svm_1.png>
+Package pdftex.def Info: figures/Census_Data_SVM_svm_1.png  used on input line 
+315.
+(pdftex.def)             Requested size: 180.67775pt x 180.67459pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<figures/MNIST_Image_Data_SVM_svm_1.png, id=44, 281.853pt x 357.7365pt>
+File: figures/MNIST_Image_Data_SVM_svm_1.png Graphic file (type png)
+<use figures/MNIST_Image_Data_SVM_svm_1.png>
+Package pdftex.def Info: figures/MNIST_Image_Data_SVM_svm_1.png  used on input 
+line 322.
+(pdftex.def)             Requested size: 180.67775pt x 180.67459pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[5 <./figures/MNIST_Images_CNN_Error_MNIST.png> <./figures/Census_Data_Boosting
+_Estimator_Count_by_Max_Depth_boosting_1.png>]
+<figures/Census_Data_KNN_knn_1.png, id=50, 308.5929pt x 357.0138pt>
+File: figures/Census_Data_KNN_knn_1.png Graphic file (type png)
+<use figures/Census_Data_KNN_knn_1.png>
+Package pdftex.def Info: figures/Census_Data_KNN_knn_1.png  used on input line 
+336.
+(pdftex.def)             Requested size: 180.67914pt x 180.68004pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<figures/Census_Data_KNN_knn_2.png, id=51, 315.0972pt x 357.0138pt>
+File: figures/Census_Data_KNN_knn_2.png Graphic file (type png)
+<use figures/Census_Data_KNN_knn_2.png>
+Package pdftex.def Info: figures/Census_Data_KNN_knn_2.png  used on input line 
+345.
+(pdftex.def)             Requested size: 180.67464pt x 180.68004pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<figures/MNIST_Images_KNN_knn_1.png, id=52, 308.5929pt x 357.0138pt>
+File: figures/MNIST_Images_KNN_knn_1.png Graphic file (type png)
+<use figures/MNIST_Images_KNN_knn_1.png>
+Package pdftex.def Info: figures/MNIST_Images_KNN_knn_1.png  used on input line
+ 356.
+(pdftex.def)             Requested size: 180.67914pt x 180.68004pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[6 <./figures/Census_Data_Boosting_Estimator_Count_by_Max_Depth_boosting_2.png>
+ <./figures/Census_Data_Boosting_Estimator_Count_by_Max_Depth_boosting_3.png> <
+./figures/Census_Data_Boosting_Estimator_Count_by_Max_Depth_boosting_4.png>]
+Underfull \vbox (badness 1661) has occurred while \output is active []
+
+<figures/Overall_Algorithm_ReviewComparison_of_Accuracy_.png, id=59, 455.301pt 
+x 343.2825pt>
+File: figures/Overall_Algorithm_ReviewComparison_of_Accuracy_.png Graphic file 
+(type png)
+<use figures/Overall_Algorithm_ReviewComparison_of_Accuracy_.png>
+Package pdftex.def Info: figures/Overall_Algorithm_ReviewComparison_of_Accuracy
+_.png  used on input line 369.
+(pdftex.def)             Requested size: 180.67212pt x 180.67123pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[7 <./figures/MNIST_Boosted_Ensemble_boosting_1.png> <./figures/MNIST_Boosted_E
+nsemble_boosting_2.png> <./figures/MNIST_Boosted_Ensemble_boosting_3.png> <./fi
+gures/Census_Data_SVM_svm_1.png>]
+<figures/Overall_Algorithm_ReviewComparison_of_Learning_Time_.png, id=68, 454.5
+783pt x 343.2825pt>
+File: figures/Overall_Algorithm_ReviewComparison_of_Learning_Time_.png Graphic 
+file (type png)
+<use figures/Overall_Algorithm_ReviewComparison_of_Learning_Time_.png>
+Package pdftex.def Info: figures/Overall_Algorithm_ReviewComparison_of_Learning
+_Time_.png  used on input line 384.
+(pdftex.def)             Requested size: 180.67667pt x 180.67123pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<figures/Overall_Algorithm_ReviewComparison_of_Prediction_Time_.png, id=69, 454
+.5783pt x 343.2825pt>
+File: figures/Overall_Algorithm_ReviewComparison_of_Prediction_Time_.png Graphi
+c file (type png)
+<use figures/Overall_Algorithm_ReviewComparison_of_Prediction_Time_.png>
+Package pdftex.def Info: figures/Overall_Algorithm_ReviewComparison_of_Predicti
+on_Time_.png  used on input line 393.
+(pdftex.def)             Requested size: 180.67667pt x 180.67123pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Underfull \hbox (badness 7203) in paragraph at lines 407--409
+[]\OT1/ptm/m/n/10 Census In-come (KDD). url: https://archive-
+ []
+
+
+Overfull \hbox (55.7139pt too wide) in paragraph at lines 411--412
+\OT1/ptm/m/n/10 https://pytorch.org/tutorials/beginner/blitz/cifar10[]tutorial.
+html.| 
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [8 <./figures/MNIST_Image_Data_SVM_svm_1.png> <./figures/Census_Data_KNN_knn_1
+.png>]
+[9 <./figures/Census_Data_KNN_knn_2.png> <./figures/MNIST_Images_KNN_knn_1.png>
+ <./figures/Overall_Algorithm_ReviewComparison_of_Accuracy_.png>] [10
+
+ <./figures/Overall_Algorithm_ReviewComparison_of_Learning_Time_.png> <./figure
+s/Overall_Algorithm_ReviewComparison_of_Prediction_Time_.png>]
+(./amenninger3-analysis.aux) ) 
+Here is how much of TeX's memory you used:
+ 3550 strings out of 480608
+ 59536 string characters out of 5903631
+ 302124 words of memory out of 5000000
+ 19408 multiletter control sequences out of 15000+600000
+ 542168 words of font info for 39 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 41i,12n,42p,1317b,288s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvi
+ps/base/8r.enc}</usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmmi10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/urw/times/utmb8a.
+pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/urw/times/utmr8a.pfb>
+Output written on amenninger3-analysis.pdf (10 pages, 727183 bytes).
+PDF statistics:
+ 99 PDF objects out of 1000 (max. 8388607)
+ 35 compressed objects within 1 object stream
+ 0 named destinations out of 1000 (max. 500000)
+ 121 words of extra memory for PDF output out of 10000 (max. 10000000)
+

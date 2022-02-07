@@ -155,9 +155,18 @@ To prune the tree, sklearn uses a minimal cost-complexity setting.  Each node in
 
 For both data sets, I also performed cross validation to use the training set only to determine the best $\alpha$ parameter, with a 5 fold setting (80\% of training data used for training, 20\% used for validation).  I would then use the test data at different $\alpha$ values to confirm the finding.
 
-For the Census Data, Figure \ref{fig:census_data_decision_tree_cross_validation} shows the use of cross validation to estimate the best solution, in this case setting for $\alpha$, without using the test data.   The best cross validation $\alpha$ value of 0.0000153 had a test accuracy of 95.24\%, which was very close to the actual best testing score of 95.30\%.  Cross Validation provides a powerful tool for evaluation a given training set without reference to test data when available.
+For the Census Data, \textbf{Figure \ref{fig:census_data_decision_tree_cross_validation}} shows the use of cross validation to estimate the best solution, in this case setting for $\alpha$, without using the test data.   The best cross validation $\alpha$ value of 0.0000153 had a test accuracy of 95.24\%, which was very close to the actual best testing score of 95.30\%.  Cross Validation provides a powerful tool for evaluation a given training set without reference to test data when available.
 
-The Census Data, shown in Figure \ref{fig:census_data_decision_tree},  mostly shows the expected curve.  Accuracy improves as nodes are added, to a point, then accuracy declines due to over fitting as more nodes are added.  Alpha, the pruning constant, leaves more nodes in the tree as it is decreased.  The Census Data also showed a unique characteristic.  One of its features (Capital Losses), showed a very high correlation with the labeled output, Income above \$50k.  Thus, a one node tree already showed 94\% accuracy.  Figure \ref{fig:census_data_decision_tree} shows this, with the the left side of the chart with few nodes already having a very high accuracy.  
+The Census Data, shown in \textbf{Figure \ref{fig:census_data_decision_tree}},  mostly shows the expected curve.  Accuracy improves as nodes are added, to a point, then accuracy declines due to over fitting as more nodes are added.  Alpha, the pruning constant, leaves more nodes in the tree as it is decreased.  The Census Data also showed a unique characteristic.  One of its features (Capital Losses), showed a very high correlation with the labeled output, Income above \$50k.  Thus, a one node tree already showed ~93\% accuracy.  Figure \ref{fig:census_data_decision_tree} shows this, with the the left side of the chart with few nodes already having a very high accuracy.  
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=2.75in]{figures/MNIST_Images_decision_tree.png}
+\caption{MNIST . }
+\label{fig:MNIST_Images_decision_tree}
+\end{figure}
+
+The MNIST image data, shown in \textbf{Figure \ref{fig:MNIST_Images_decision_tree}}, showed a more normal accuracy curve than the Census Data, with accuracy improving dramatically with added nodes until a maximum accuracy was reached, then accuracy declines due to over fitting.  
 
 \begin{figure}[h]
 \centering
@@ -166,19 +175,8 @@ The Census Data, shown in Figure \ref{fig:census_data_decision_tree},  mostly sh
 \label{fig:MNIST_Images_decision_tree_cross_validation}
 \end{figure}
 
-Figure \ref{fig:MNIST_Images_decision_tree_cross_validation}  shows the cross validation error curves for the MNIST image data.  The best cross validation $\alpha$ value of 0.0000762 had a test accuracy of 87.18\%,  while the actual best testing score of 88.54\%.  This was a larger gap than found in the Census data, but still relatively close.
+\textbf{Figure \ref{fig:MNIST_Images_decision_tree_cross_validation}}  shows the cross validation error curves for the MNIST image data.  The best cross validation $\alpha$ value of 0.0000762 had a test accuracy of 87.18\%,  while the actual best testing score of 88.54\%.  This was a larger gap than found in the Census data, but still relatively close. The maximum accuracy achieved was 88.7\%, which was significantly below the census data.  A decision tree is looking at one pixel at a time,  so small variations in position or size would be very challenging for this algorithm.  I think other classifiers, especially the neural network to better handle image data. 
 
-\begin{figure}[h]
-\centering
-\includegraphics[width=2.75in]{figures/MNIST_Images_decision_tree_cross_validation.png}
-\caption{MNIST Images Cross Validation Error:  The chart shows continual reduction in training error, while the Cross Validation error reaches a minimum at an $\alpha$ of 0.0000542 and then starts to rise.  This was very close to the best $\alpha$ found using the testing data. }
-\label{fig:MNIST_Images_decision_tree_cross_validation}
-\end{figure}
-
-NEED TO FIX
-
-The MNIST image data, shown in Figure \ref{fig:MNIST_Images_decision_tree}, showed a more normal accuracy curve than the Census Data, with accuracy improving dramatically with added nodes until a maximum accuracy was reached, then accuracy declines due to over fitting.  The maximum accuracy achieved was 88.7\%, which was significantly below the census data.  A decision tree is looking at one pixel at a time, 
-so small variations in position or size would be very challenging for this algorithm.  I think other classifiers, especially the neural network to better handle image data. 
 
 \section{Neural Networks}
 For the neural network, I used PyTorch with two hidden layers, the Adam optimizer and Linear layers.  I then adjusted the size of the layer, the learning rate, and epoch cycles to find the optimal settings.  I used mean squared error loss, which I don't think is a great fit for a binary classification, but had significant trouble getting that type of model to work.  
@@ -192,7 +190,7 @@ In just the initial setup for the Census data, I quickly determined I would need
 \label{fig:census_neural_network_start}
 \end{figure}
 
-Figure \ref{fig:census_neural_network_start} clearly shows the preference for the smaller layer size and smaller learning rate, although the differences in absolute accuracy are quite small.  This is a victory still due to the very skewed dataset, with only ~6\% of the data being labeled positively.  The smaller layer size performance is straight out of the class lecture with regard to preferring simpler solutions.  I had expected larger layer sizes to be more effective.  The charts indicates that further exploration at the lower end was worthwhile.
+\textbf{Figure \ref{fig:census_neural_network_start}} clearly shows the preference for the smaller layer size and smaller learning rate, although the differences in absolute accuracy are quite small.  This is a victory still due to the very skewed dataset, with only ~6\% of the data being labeled positively.  The smaller layer size performance is straight out of the class lecture with regard to preferring simpler solutions.  I had expected larger layer sizes to be more effective.  The charts indicates that further exploration at the lower end was worthwhile.
 
 \begin{figure}[h]
 \centering
@@ -201,7 +199,7 @@ Figure \ref{fig:census_neural_network_start} clearly shows the preference for th
 \label{fig:census_neural_network_error}
 \end{figure}
 
-Figure \ref{fig:census_neural_network_error} shows one of the best performing settings from the initial review.  It shows that the cross validation error was very close to the real test data error and a good guide for decision making.  The chart also doesn't clearly have a movement up of the cross validation error, indicating more epoch training could be beneficial.
+\textbf{Figure \ref{fig:census_neural_network_error}} shows one of the best performing settings from the initial review.  It shows that the cross validation error was very close to the real test data error and a good guide for decision making.  The chart also doesn't clearly have a movement up of the cross validation error, indicating more epoch training could be beneficial.
 
 \begin{figure}[h]
 \centering
@@ -210,9 +208,9 @@ Figure \ref{fig:census_neural_network_error} shows one of the best performing se
 \label{fig:census_neural_network_v2}
 \end{figure}
 
-I then tried a new round of testing with lower learning rates, smaller network sizes and longer epoch training.  Those results are shown in Figure \ref{fig:census_neural_network_error}.  The absolute gains over in performance where very, very small, indicating that this was the practical limit of performance.  The best result was with a learning rate of 0.000001, hidden layer size of 16, with the best result coming around 600 epochs of training.  This performed worse than the decision tree. 
+I then tried a new round of testing with lower learning rates, smaller network sizes and longer epoch training.  Those results are shown in \textbf{Figure \ref{fig:census_neural_network_v2}}.  The absolute gains over in performance where very, very small, indicating that this was the practical limit of performance.  The best result was with a learning rate of 0.000001, hidden layer size of 16, with the best result coming around 600 epochs of training.  This performed worse than the decision tree. 
 
-For the MNIST data, I created a different neural network topology.  The PyTorch site has many helpful resources and tutorials [3] providing good guidance for one hot encoding.  The MNIST dataset is a very popular one and there are many neural network implementations, but I stuck to refereing to the general PyTorch tutorial.I was able to use this as a skeleton to explore the algorithm and the data. I kept the image data flattened, creating 784 input features.  I then had two hidden layers, the first with 120 nodes, the second with 84 nodes.  For the output, I used one hot encoding on the labels, with one bit for each value between 0 and 9, creating 10 outputs.  To convert the 10 outputs to a single integer, the bit with the highest value is chosen.  I did not initially include any convolutional layers to allow for a more accurate comparison between the decision tree and the neural network.
+For the MNIST data, I created a different neural network topology.  The PyTorch site has many helpful resources and tutorials [3] providing good guidance for one hot encoding.  The MNIST dataset is a very popular one and there are many neural network implementations, but I stuck to the general PyTorch tutorial for a core understanding.  I was able to use this as a skeleton to explore the algorithm and the data. I kept the image data flattened, creating 784 input features.  I then had two hidden layers, the first with 120 nodes, the second with 84 nodes.  For the output, I used one hot encoding on the labels, with one bit for each value between 0 and 9, creating 10 outputs.  To convert the 10 outputs to a single integer, the bit with the highest value is chosen.  I did not initially include any convolutional layers to allow for a more accurate comparison between the decision tree and the neural network.
 
 For this network, I used a different loss function, Cross Entropy Loss, to account for the single selection amongst one of ten output bits.  I also used the SGD optimizer with momentum. 
 
@@ -223,7 +221,7 @@ For this network, I used a different loss function, Cross Entropy Loss, to accou
 \label{fig:MNIST_Error_neural_network}
 \end{figure}
 
-Figure \ref{fig:MNIST_Error_neural_network} shows the result of the initial review with the flattened images.  Cross validation closely tracks the test accuracy, indicating it is a good tool for decision making.  The training improvement plateaued around 275 epochs of training.  The best accuracy reached here was 97.27\%, which is ~9\% better than the decision tree.  I think this is a result of several things.  From the dataset's standpoint, it is a completely continuous data set, with no discrete values, which is better for the linear layers of the neural network.  It is also a less noisy dataset, with a reasonable outcome expected for each instance.  In contrast, the Census data does not have a necessary relationship, with some instances conflicting with other ones on output labels.  I also think the cross entropy loss function is also much better fit for this classification problem.
+\textbf{Figure \ref{fig:MNIST_Error_neural_network}} shows the result of the initial review with the flattened images.  Cross validation closely tracks the test accuracy, indicating it is a good tool for decision making.  The training improvement plateaued around 275 epochs of training.  The best accuracy reached here was 97.27\%, which is ~9\% better than the decision tree.  I think this is a result of several things.  From the dataset's standpoint, it is a completely continuous data set, with no discrete values, which is better for the linear layers of the neural network.  It is also a less noisy dataset, with a reasonable outcome expected for each instance.  In contrast, the Census data does not have a necessary relationship, with some instances conflicting with other ones on output labels.  I also think the cross entropy loss function is also much better fit for this classification problem.
 
 A key distinction in the MNIST dataset is that each feature has a spatial relationship to the others, in the form of a 2 dimensional grid.  It is a common practice to use convolutional networks to take advantage of that relationship.  I added two convolutional networks to the beginning of the network.  The first added 10 channels and used a kernel size of 5.  This means that for each 5 X 5 grid, a 5 X 5 filter is applied that multiplies each grid by the filter number, then sums the results.  This is moved over all parts of the image and allows for spatial features to be highlighted.  There is a different filter for each channel, with the different filters enhancing aspects of the grid, like edge detection.  Without padding the image, this will result in an output that has 4 less on each dimension, reducing the 28 X 28 grid to 24 X 24.   There is then a pooling layer that takes each 2 X 2 grid and choses the max value.  This reduces teach dimension by 2, changing the 24 X 24 grid to 12 X 12.  Another convolutional layer was added with 20 channels, leading to an output of 20 X 4 X 4.  This was then connected to the previous network.
 
@@ -234,7 +232,7 @@ A key distinction in the MNIST dataset is that each feature has a spatial relati
 \label{fig:MNIST_Error_MNIST_cnn}
 \end{figure}
 
-The results were much better using the convolutional networks.  Figure \ref{fig:MNIST_Error_MNIST_cnn} shows the great increase in performance, with it reaching the the same accuracy of the non CNN network in 13 epochs vs 275 epochs.  However, the training time was much greater, with the CNN layers requiring significant processing time. The maximum accuracy also improved by ~1.5\% to 98.89\%.  This improvement in accuracy is significant as the the last few percentage points in accuracy can make the difference in many real world settings between success and failure. 
+The results were much better using the convolutional networks.  \textbf{Figure \ref{fig:MNIST_Error_MNIST_cnn}} shows the great increase in performance, with it reaching the the same accuracy of the non CNN network in 13 epochs vs 275 epochs.  However, the training time was much greater, with the CNN layers requiring significant processing time. The maximum accuracy also improved by ~1.5\% to 98.89\%.  This improvement in accuracy is significant as the the last few percentage points in accuracy can make the difference in many real world settings between success and failure. 
 
 Overall, the CNN layers represent use of domain knowledge about image data and demonstrate the flexible power of neural networks.  
 
@@ -270,13 +268,13 @@ Overall, the CNN layers represent use of domain knowledge about image data and d
 
 I chose to use the sklearn GradientBoostingClassifier for boosting.  I set the classifiers loss setting to "exponential" so that is reverts to the ADABoost algorithm. Without this setting, the classifier uses a more complex loss function and it does a gradient descent.  I chose the ADABoost because it was closer to the algorithm discussed in class.
 
-Two of the key considerations when working with ensemble boosting is how many learners to use and how "weak" the learners are.  The Max Depth setting determines what the maximum depth of each of the estimator trees is.  By making this small, the learners become less accurate, but also less prone to overfitting. Figure \ref{fig:boosting_census_1} shows how increasing depth up to 5 improves performance, but at depths over 10 performance decreases and becomes erratic.  The change at higher levels is somewhat counter intuitive, as the individual learners are more accurate, but is likely due to the fact that the more accurate learners are overfitting.  Figure \ref{fig:boosting_census_1} also shows how adding estimators improves performance, although with diminishing returns.  
+Two of the key considerations when working with ensemble boosting is how many learners to use and how "weak" the learners are.  The Max Depth setting determines what the maximum depth of each of the estimator trees is.  By making this small, the learners become less accurate, but also less prone to overfitting. \textbf{Figure \ref{fig:boosting_census_1}} shows how increasing depth up to 5 improves performance, but at depths over 10 performance decreases and becomes erratic.  The change at higher levels is somewhat counter intuitive, as the individual learners are more accurate, but is likely due to the fact that the more accurate learners are overfitting.  \textbf{Figure \ref{fig:boosting_census_1}} also shows how adding estimators improves performance, although with diminishing returns.  
 
-I then focused on reviewing the number of features setting.  The classifier will consider a maximum number of features chosen at random for each tree.  Generally, lower numbers make the learners less accurate, high numbers may be better initially but allow for some overfitting. Figure \ref{fig:boosting_census_2}  shows that while considering up to 20 features is the best, 6 features is very close.
+I then focused on reviewing the number of features setting.  The classifier will consider a maximum number of features chosen at random for each tree.  Generally, lower numbers make the learners less accurate, high numbers may be better initially but allow for some overfitting. \textbf{Figure \ref{fig:boosting_census_2}}  shows that while considering up to 20 features is the best, 6 features is very close.
 
-Figure \ref{fig:boosting_census_3}  shows overfitting after 400 - 800 estimators, leading to a final review with lower feature counts focused on 80-320 estimators.
+\textbf{Figure \ref{fig:boosting_census_3}}  shows overfitting after 400 - 800 estimators, leading to a final review with lower feature counts focused on 80-320 estimators.
 
-Figure \ref{fig:boosting_census_4}  shows maximum features of 5 with 200 estimators is found to be the best solution, achieving  95.65\%.  This is better than the 95.30\% achieved with the decision tree, showing the power of using relatively weak learners in a thoughtful ensemble.
+\textbf{Figure \ref{fig:boosting_census_4}}  shows maximum features of 5 with 200 estimators is found to be the best solution, achieving  95.65\%.  This is better than the 95.30\% achieved with the decision tree, showing the power of using relatively weak learners in a thoughtful ensemble.
 
 \begin{figure}[h]
 \centering
@@ -287,7 +285,7 @@ Figure \ref{fig:boosting_census_4}  shows maximum features of 5 with 200 estimat
 
 For the MNIST data, I reviewed the estimator count vs max depth to begin with.  I set the maximum features to 28, the square root of the features, which is a commonly used starting point.
 
-Figure \ref{fig:boosting_mnist_1}  shows overfitting with relatively few estimators.  An interesting point is that the over fitting then reaches a plateau, which may be from the interplay between maximum features and maximum depth.  It is also a bit hard to make sense of the max depth, as the best performing are the low of 2,4, and high of 15. 
+\textbf{Figure \ref{fig:boosting_mnist_1}}  shows overfitting with relatively few estimators.  An interesting point is that the over fitting then reaches a plateau, which may be from the interplay between maximum features and maximum depth.  It is also a bit hard to make sense of the max depth, as the best performing are the low of 2,4, and high of 15. 
 
 \begin{figure}[h]
 \centering
@@ -296,7 +294,7 @@ Figure \ref{fig:boosting_mnist_1}  shows overfitting with relatively few estimat
 \label{fig:boosting_mnist_2}
 \end{figure}
 
-More review was then performed using a fixed number of estimators, 25. Figure \ref{fig:boosting_mnist_2} shows the result, with the best results being a max depth of 15, with more features generally performing better.
+More review was then performed using a fixed number of estimators, 25. \textbf{Figure \ref{fig:boosting_mnist_2}} shows the result, with the best results being a max depth of 15, with more features generally performing better.
 
 \begin{figure}[h]
 \centering
@@ -305,7 +303,7 @@ More review was then performed using a fixed number of estimators, 25. Figure \r
 \label{fig:boosting_mnist_3}
 \end{figure}
 
-The final review, seen in Figure \ref{fig:boosting_mnist_3}, shows the best performance with a max depth of 14 and max features of 38.  This achieved accuracy of 94.44\%, which is significantly better than the decision tree, but not as good as the neural network.  This makes sense, as the boosted ensemble is better able to deal with the large number of features, but still doesn't take optimum advantage of the spatial relationships in image files.
+The final review, seen in \textbf{Figure \ref{fig:boosting_mnist_3}}, shows the best performance with a max depth of 14 and max features of 38.  This achieved accuracy of 94.44\%, which is significantly better than the decision tree, but not as good as the neural network.  This makes sense, as the boosted ensemble is better able to deal with the large number of features, but still doesn't take optimum advantage of the spatial relationships in image files.
 
 
 \section{Support Vector Machines}
@@ -326,9 +324,9 @@ I chose to use SVC from the sklearn library.  The key area for review was the us
 \label{fig:svm_mnist_1}
 \end{figure}
 
-The Census Data review is seen in Figure \ref{fig:svm_census_1}.  This shows that the Polynomial (3rd degree) and Radial Bias kernels performed the best.  The slight winner was Polynomial, with a test accuracy of  94.83\%.  The SVC solver took a significantly longer time to solve than the previous algorithms.  The dataset size, with almost 200,000 training instances is a significant challenge to this solution type.
+The Census Data review is seen in \textbf{Figure \ref{fig:svm_census_1}}.  This shows that the Polynomial (3rd degree) and Radial Bias kernels performed the best.  The slight winner was Polynomial, with a test accuracy of  94.83\%.  The SVC solver took a significantly longer time to solve than the previous algorithms.  The dataset size, with almost 200,000 training instances is a significant challenge to this solution type.
 
-The MNIST Data review is seen in Figure \ref{fig:svm_mnist_1}.  On this dataset, the Radial Bias kernel performed the best,  with a test accuracy of 97.92\%.  This was a very good score, not as good at CNN Network!!!!!!
+The MNIST Data review is seen in \textbf{Figure \ref{fig:svm_mnist_1}}.  On this dataset, the Radial Bias kernel performed the best,  with a test accuracy of 97.92\%.  This was a very good score, but not as good at CNN Neural Network.
 
 \section{K-Nearest Neighbors}
 I used the sklearn KNeighborsClassifier for the K-Nearest Neighbors classifier, with key settings for review were the appropriate number of neighbors, the distance method and potentially weighting based on distance.  One thing to note is that K-Nearest Neighbors is a lazy learner, which in this application means that the fit function, which is used in the classifier models, is very fast, mostly just loading the training data.  It is on the predict function that the learner takes its time.
@@ -336,22 +334,22 @@ I used the sklearn KNeighborsClassifier for the K-Nearest Neighbors classifier, 
 \begin{figure}[h]
 \centering
 \includegraphics[width=2.5in, height=2.5in]{figures/Census_Data_KNN_knn_1.png}
-\caption{Census KNN:  Error rate by different settings of K and different distance formulas.  Neighbors were not weighted by distance.  }
+\caption{Census KNN K :  Error rate by different settings of K and different distance formulas.  Neighbors were not weighted by distance.  }
 \label{fig:census_knn_1}
 \end{figure}
 
-Figure \ref{fig:census_knn_1} shows the Census KNN classifier.  Manhattan Distance worked the best, with larger values of K for more neighbors working better.  With a mix of continuous (Age) features and discrete (Sex, Working Status), distance or similarity is tricky to calculate.  With discrete values encoded as numbers, a false sense of dissimilarity can occur.  For instance, a category with 4 values - Employed, Un-employed, Student, Retired might be encoded to 0,1,2,3.  When calculating feature distance between an instance with Employed (0) to Un-employed (1), the distance would be 1, but to Retired(3) would be 3.  However, this is not a good measure of dissimilarity in this case.  Hamming distance, which just calculates distance with either the values match or don't match, would seem to be a better measure, but actually performs the worst of the three measures.  A key issue is that the 40 features do not have weightings, so each feature is valued the same.  This is strongly contrasted with a decision tree, where only the features that provide the most information gain are used.
+\textbf{Figure \ref{fig:census_knn_1}} shows the Census KNN classifier.  Manhattan Distance worked the best, with larger values of K for more neighbors working better.  With a mix of continuous (Age) features and discrete (Sex, Working Status), distance or similarity is tricky to calculate.  With discrete values encoded as numbers, a false sense of dissimilarity can occur.  For instance, a category with 4 values - Employed, Un-employed, Student, Retired might be encoded to 0,1,2,3.  When calculating feature distance between an instance with Employed (0) to Un-employed (1), the distance would be 1, but to Retired(3) would be 3.  However, this is not a good measure of dissimilarity in this case.  Hamming distance, which just calculates distance with either the values match or don't match, would seem to be a better measure, but actually performs the worst of the three measures.  A key issue is that the 40 features do not have weightings, so each feature is valued the same in this KNN solution.  This is strongly contrasted with a decision tree, where only the features that provide the most information gain are used.
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=2.5in, height=2.5in]{figures/Census_Data_KNN_knn_2.png}
-\caption{Census KNN:  Error rate by different settings of K and weighting by distance or uniform weighting.  }
+\caption{Census KNN Weighting and Distance review:  Error rate by different settings of K and weighting by distance or uniform weighting.  }
 \label{fig:census_knn_2}
 \end{figure}
 
-Another round of review was done, checking the K values in a higher range, and considering weighting neighbors by their distance.  This is seen in Figure \ref{fig:census_knn_2}.  Best Result
+Another round of review was done on the census data, checking the K values in a higher range, and considering weighting neighbors by their distance and is seen in \textbf{Figure \ref{fig:census_knn_2}}.  
 
-One hot encoding, takes very long due to 20 times the features
+One way to remove the issue of arbitrarily encoding discrete values is to use one hot encoding, which creates a new binary feature for every value in all discrete features.  For the census data set, this increased the number of features by a factor of 20. With the KNN dataset, this significantly increased the prediction time with no gain in accuracy.  While it eliminated the false distances of encoded features, the curse of dimensionality meant that all the added features created a much bigger dimensional space, which limited accuracy improvements. 
 
 \begin{figure}[h]
 \centering
@@ -360,32 +358,48 @@ One hot encoding, takes very long due to 20 times the features
 \label{fig:mnist_knn_1}
 \end{figure}
 
-Figure \ref{fig:mnist_knn_1} shows the MNIST KNN classifier.  The best value of K is 3 with neighbors weighted by inverse of distance.  Overall, this performs very well, with an overall accuracy of 97.17\%, the second best of all algorithms.  The strong performance for the MNIST images is driven by several things.  The algorithm effectively uses all the feature data, because all are calculated in the distance metric.  With all features being continuous and originally on the same scale, the distance metric is an effective way to compare all features.  The intuition is that similar numbers will be closer for each pixel \ feature than dissimilar ones.  For example, two zeros may not line up perfectly, but they will have closer pixels that a one and a zero.  Weighting neighbors by their distance enhances this, making less likely neighbors less impactful.   The small K also makes sense because numbers may be shifted in the image. For example, two images of a 1 with one shifted to the left would have a big distance, as almost no pixels are a match.  In this case, a large K would allow other images with a big distance to be selected, like a 0 which does cross over a 1 in several places.  A small K restricts this selection to more likely true matches.
+\textbf{Figure \ref{fig:mnist_knn_1}} shows the MNIST KNN classifier.  The best value of K is 3 with neighbors weighted by inverse of distance.  Overall, this performs very well, with an overall accuracy of 97.17\%, the second best of all algorithms.  The strong performance for the MNIST images is driven by several things.  The algorithm effectively uses all the feature data, because all are calculated in the distance metric.  With all features being continuous and originally on the same scale, the distance metric is an effective way to compare all features.  The intuition is that similar numbers will be closer for each pixel \ feature than dissimilar ones.  For example, two zeros may not line up perfectly, but they will have closer pixels that a one and a zero.  Weighting neighbors by their distance enhances this, making less likely neighbors less impactful.   The small K also makes sense because numbers may be shifted in the image. For example, two images of a 1 with one shifted to the left would have a big distance, as almost no pixels are a match.  In this case, a large K would allow other images with a big distance to be selected, like a 0 which does cross over a 1 in several places.  A small K restricts this selection to more likely true matches.
 
-The weakness for this algorithm is that it really isn't generalizing, but is very dependent on its training set having similar examples to the test set.
+This algorithm's ability to generalize is very dependent on the training set in a clear way, in that the classification of a test instance directly uses similar training instances.  The number of neighbors, K, the distance metric and weighting can be adjusted to produce a form of generalization.
 
 \section{Summary}
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=2.5in, height=2.5in]{figures/Overall_Algorithm_ReviewComparison_of_Accuracy_.png}
-\caption{Overall Accuracy Comparison:  FILL IN.  }
+\caption{Overall Accuracy Comparison:  This compares the accuracy of each algorithm on the test data for each data set using the training data and best tuning parameters for that algorithm and dataset.  }
 \label{fig:overall_accuracy}
 \end{figure}
 
+\textbf{Figure \ref{fig:overall_accuracy}} reviews the algorithms overall accuracy on each data set.  This uses the best tuning parameters after learning on the training data with cross validation, then testing using the test data for each set.  
+ 
+For the Census data, the boosting algorithm performed best.  The Census data was a skewed dataset, with positive responses being ~6\% of the data and all the algorithms were able to reach ~93-94\% accuracy by returning negative for all items.  Getting above this basic threshold was challenging due to the noisiness and possibly the mixed discrete and continuous features.  Boosting, specifically ADABoost, as mentioned in the reading and lectures, is able to handle noisiness and still generalize fairly well.  KNN performed the worst, which makes sense with a noisy dataset and challenging distance metric for arbitrary discrete values.   
+
+For all the algorithms, I don't think I fully optimized the data presentation of the discrete features in the Census dataset.  I tried one hot encoding of the discrete features for the KNN algorithm without improving accuracy and greatly increasing prediction time, but did not try it on the other algorithms.  The interplay between discrete feature representation and the algorithms is critical and can strongly influence the outcome.
+ 
+For the MNIST data, the neural network with two convolutional layers performed the best.  The convolutional layers are especially constructed to take advantage of the spatial relationship in the MNIST image data, consuming the 2d image arrays without flattening.  I doubt the upper limit of generalized accuracy was met, with the significant other network topologies which could be tested.  The basic decision tree performed the worst by a large margin.  It was a poor fit due to the relatively large number of features (784) which were strongly related spatially.  In comparison, boosting performed much better due to its ability to generalize better over the feature set.
+ 
 \begin{figure}[h]
 \centering
 \includegraphics[width=2.5in, height=2.5in]{figures/Overall_Algorithm_ReviewComparison_of_Learning_Time_.png}
-\caption{Learning Time Comparison:  FILL IN.  }
+\caption{Learning Time Comparison:  This compares the time to learn for each algorithm on the training data using the best tuning parameters for that algorithm and data set. }
 \label{fig:overall_learning_time}
 \end{figure}
-
+ 
+Accuracy is not the only critical metric, with many real world applications needing to trade off accuracy with time to learn and time to predict.  \textbf{Figure \ref{fig:overall_learning_time}} shows the comparisons of time to learn on both datasets for all algorithms.  KNN took the least time to learn in that it is a lazy learner.  The "learning" or fitting step simply loads the data with some small space optimizations, with no real learning occurring.  The quickest eager learner was the decision tree, which is also the simplest.  The neural network and the support vector machines took the longest time to learn, which is not surprising in that they have the most weights and tunings that are being adjusted during learning. 
+ 
 \begin{figure}[h]
 \centering
 \includegraphics[width=2.5in, height=2.5in]{figures/Overall_Algorithm_ReviewComparison_of_Prediction_Time_.png}
-\caption{Prediction Time Comparison:  FILL IN.  }
+\caption{Prediction Time Comparison:  This compares the time to predict results on the testing data for each dataset using each algorithm with the best tuning parameters.  }
 \label{fig:overall_prediction_time}
 \end{figure}
+ 
+\textbf{Figure \ref{fig:overall_prediction_time}} shows the time to predict using the algorithms after they are fitted.  There is a complete reversal for the KNN algorithm for the Census data, with it taking by far the longest time to predict.  As a lazy learner, it is effectively learning by finding each test instances' nearest neighbors.  It effectively has to "learn" every test instance, with no learning benefit accrued to other instances.  However, it performed faster than SVM, most likely due to the fact that the distance function was well behaved with continuous and comparable features.
+
+Boosting and the Decision tree are the fastest predictors, with their simple models performing very quickly.  Neural networks, which have orders of magnitude more weights than trees or boosted ensembles, still perform very quickly, with their prediction step being straight forward.  Neural networks also lend themselves to specialized hardware using massive parallel computations. Interestingly, support vector machines take the longest time for predictions of the eager learner algorithms and also were among the longest in the learning time.  
+
+This was a very satisfying exercise due to the ability to try the same data sets on multiple algorithms and try each algorithm on multiple data sets. I found the Census dataset a bit frustrating and would be interested to try a less skewed dataset, potentially with only discrete features in the future.  Throughout the exercise, feature review for the Census data may have been very useful, which I believe we will review some of that later in the class.  I had no exposure to SVM's before this class and would consider them in the future due to their strong performance.  
 
 \section{References}
 \begin{tabular}{l p{2.75in}}
