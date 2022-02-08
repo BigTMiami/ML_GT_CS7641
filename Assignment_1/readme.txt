@@ -2,7 +2,7 @@ Anthony Menninger
 CS 7641 Machine Learning
 Assignment 1
 
-Infrastucture Setup
+Infrastructure Setup
 * Uses Python 3.8 (May work with 3.6 or 3.7) 
 * CODE: https://github.com/BigTMiami/ML_GT_CS7641
     * To download, run: git clone https://github.com/BigTMiami/ML_GT_CS7641.git
