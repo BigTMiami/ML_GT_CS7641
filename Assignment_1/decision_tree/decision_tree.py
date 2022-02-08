@@ -203,90 +203,91 @@ def plot_alpha_curve_with_cross_validation(
     fig.tight_layout()
     plt.savefig(fname=filename, bbox_inches="tight")
 
+if __name__ == "main":
 
-# Census Data
-(
-    df_data,
-    df_label,
-    df_data_numeric,
-    df_label_numeric,
-    df_test_data,
-    df_test_label,
-    df_test_data_numeric,
-    df_test_label_numeric,
-    data_classes,
-) = get_census_data_and_labels()
+    # Census Data
+    (
+        df_data,
+        df_label,
+        df_data_numeric,
+        df_label_numeric,
+        df_test_data,
+        df_test_label,
+        df_test_data_numeric,
+        df_test_label_numeric,
+        data_classes,
+    ) = get_census_data_and_labels()
 
 
-alphas, alpha_scores, alpha_node_count, alpha_max_depth = get_decision_tree_pruning_curve(
-    df_data_numeric, df_label_numeric, df_test_data_numeric, df_test_label_numeric
-)
+    alphas, alpha_scores, alpha_node_count, alpha_max_depth = get_decision_tree_pruning_curve(
+        df_data_numeric, df_label_numeric, df_test_data_numeric, df_test_label_numeric
+    )
 
-(
-    alphas,
-    alpha_scores,
-    alpha_node_count,
-    alpha_max_depth,
-    alpha_train_scores,
-    cross_validation_scores,
-) = get_decision_tree_pruning_curve_with_cross_validation(
-    df_data_numeric, df_label_numeric, df_test_data_numeric, df_test_label_numeric
-)
+    (
+        alphas,
+        alpha_scores,
+        alpha_node_count,
+        alpha_max_depth,
+        alpha_train_scores,
+        cross_validation_scores,
+    ) = get_decision_tree_pruning_curve_with_cross_validation(
+        df_data_numeric, df_label_numeric, df_test_data_numeric, df_test_label_numeric
+    )
 
-plot_alpha_curve(alphas, alpha_scores, alpha_node_count, alpha_max_depth, "Census Data", xscale="log", nodes_to_trim=3)
+    plot_alpha_curve(alphas, alpha_scores, alpha_node_count, alpha_max_depth, "Census Data", xscale="log", nodes_to_trim=3)
 
-plot_alpha_curve_with_cross_validation(
-    alphas,
-    alpha_scores,
-    alpha_node_count,
-    alpha_max_depth,
-    alpha_train_scores,
-    cross_validation_scores,
-    "Census Data",
-    xscale="log",
-    nodes_to_trim=3,
-)
+    plot_alpha_curve_with_cross_validation(
+        alphas,
+        alpha_scores,
+        alpha_node_count,
+        alpha_max_depth,
+        alpha_train_scores,
+        cross_validation_scores,
+        "Census Data",
+        xscale="log",
+        nodes_to_trim=3,
+    )
 
-print(f"Max Cencus Accuracy:{max(alpha_scores)}")
+    print(f"Max Cencus Accuracy:{max(alpha_scores)}")
 
-# Image Data
-train_images_flattened, train_labels, test_images_flattened, test_labels = get_mnist_data_labels()
+    # Image Data
+    train_images_flattened, train_labels, test_images_flattened, test_labels = get_mnist_data_labels()
 
-alphas_image, alpha_scores_image, alpha_node_count_image, alpha_max_depth_image = get_decision_tree_pruning_curve(
-    train_images_flattened, train_labels, test_images_flattened, test_labels, criterion="entropy"
-)
+    alphas_image, alpha_scores_image, alpha_node_count_image, alpha_max_depth_image = get_decision_tree_pruning_curve(
+        train_images_flattened, train_labels, test_images_flattened, test_labels, criterion="entropy"
+    )
 
-(
-    alphas_image,
-    alpha_scores_image,
-    alpha_node_count_image,
-    alpha_max_depth_image,
-    alpha_train_scores_image,
-    cross_validation_scores_image,
-) = get_decision_tree_pruning_curve_with_cross_validation(
-    train_images_flattened, train_labels, test_images_flattened, test_labels
-)
+    (
+        alphas_image,
+        alpha_scores_image,
+        alpha_node_count_image,
+        alpha_max_depth_image,
+        alpha_train_scores_image,
+        cross_validation_scores_image,
+    ) = get_decision_tree_pruning_curve_with_cross_validation(
+        train_images_flattened, train_labels, test_images_flattened, test_labels
+    )
 
-plot_alpha_curve(
-    alphas_image,
-    alpha_scores_image,
-    alpha_node_count_image,
-    alpha_max_depth_image,
-    "MNIST Images",
-    xscale="log",
-    nodes_to_trim=0,
-)
+    plot_alpha_curve(
+        alphas_image,
+        alpha_scores_image,
+        alpha_node_count_image,
+        alpha_max_depth_image,
+        "MNIST Images",
+        xscale="log",
+        nodes_to_trim=0,
+    )
 
-plot_alpha_curve_with_cross_validation(
-    alphas_image,
-    alpha_scores_image,
-    alpha_node_count_image,
-    alpha_max_depth_image,
-    alpha_train_scores_image,
-    cross_validation_scores_image,
-    "MNIST Images",
-    xscale="log",
-    nodes_to_trim=0,
-)
+    plot_alpha_curve_with_cross_validation(
+        alphas_image,
+        alpha_scores_image,
+        alpha_node_count_image,
+        alpha_max_depth_image,
+        alpha_train_scores_image,
+        cross_validation_scores_image,
+        "MNIST Images",
+        xscale="log",
+        nodes_to_trim=0,
+    )
 
-print(f"Max MNIST Accuracy:{max(alpha_scores_image)}")
+    print(f"Max MNIST Accuracy:{max(alpha_scores_image)}")

@@ -3,15 +3,18 @@ import idx2numpy
 from PIL import Image
 import torch as t
 
-# https://pytorch.org/tutorials/beginner/blitz/cifar10_tutorial.html
 
+# Data location for download
+# http://yann.lecun.com/exdb/mnist/
+
+MNIST_DATA_LOCATION = "Assignment_1/data/mnist/"
 
 def int_to_one_hot(initial_array):
     return np.eye(10)[initial_array]
 
 
 def get_mnist_data_labels(one_hot_labels=False, scale_data=False, as_tensor=False):
-    train_image_file = "Assignment_1/data/mnist/train-images.idx3-ubyte"
+    train_image_file = MNIST_DATA_LOCATION + "train-images.idx3-ubyte"
     train_images = idx2numpy.convert_from_file(train_image_file)
     tid = train_images.shape
     # train_images_flattened = train_images.reshape(60000, 784)
@@ -21,19 +24,19 @@ def get_mnist_data_labels(one_hot_labels=False, scale_data=False, as_tensor=Fals
     # image = Image.fromarray(train_images[12313])
     # image.show()
 
-    train_label_file = "Assignment_1/data/mnist/train-labels.idx1-ubyte"
+    train_label_file = MNIST_DATA_LOCATION + "train-labels.idx1-ubyte"
     train_labels = idx2numpy.convert_from_file(train_label_file)
     if one_hot_labels:
         train_labels = int_to_one_hot(train_labels)
 
-    test_image_file = "Assignment_1/data/mnist/t10k-images.idx3-ubyte"
+    test_image_file = MNIST_DATA_LOCATION + "t10k-images.idx3-ubyte"
     test_images = idx2numpy.convert_from_file(test_image_file)
     tidt = test_images.shape
     test_images_flattened = test_images.reshape(tidt[0], tidt[1] * tidt[2])
     if scale_data:
         test_images_flattened = test_images_flattened / 255.0
 
-    test_label_file = "Assignment_1/data/mnist/t10k-labels.idx1-ubyte"
+    test_label_file = MNIST_DATA_LOCATION + "t10k-labels.idx1-ubyte"
     test_labels = idx2numpy.convert_from_file(test_label_file)
     if one_hot_labels:
         test_labels = int_to_one_hot(test_labels)
@@ -48,7 +51,7 @@ def get_mnist_data_labels(one_hot_labels=False, scale_data=False, as_tensor=Fals
 
 
 def get_mnist_data_labels_neural(flatten_images=True):
-    train_image_file = "Assignment_1/data/mnist/train-images.idx3-ubyte"
+    train_image_file = MNIST_DATA_LOCATION + "train-images.idx3-ubyte"
     train_images = idx2numpy.convert_from_file(train_image_file)
     tid = train_images.shape
     if flatten_images:
@@ -56,11 +59,11 @@ def get_mnist_data_labels_neural(flatten_images=True):
 
     train_images = train_images / 255.0
 
-    train_label_file = "Assignment_1/data/mnist/train-labels.idx1-ubyte"
+    train_label_file = MNIST_DATA_LOCATION + "train-labels.idx1-ubyte"
     train_labels = idx2numpy.convert_from_file(train_label_file)
     train_one_hot_labels = int_to_one_hot(train_labels)
 
-    test_image_file = "Assignment_1/data/mnist/t10k-images.idx3-ubyte"
+    test_image_file = MNIST_DATA_LOCATION + "t10k-images.idx3-ubyte"
     test_images = idx2numpy.convert_from_file(test_image_file)
     tidt = test_images.shape
     if flatten_images:
@@ -68,7 +71,7 @@ def get_mnist_data_labels_neural(flatten_images=True):
 
     test_images = test_images / 255.0
 
-    test_label_file = "Assignment_1/data/mnist/t10k-labels.idx1-ubyte"
+    test_label_file = MNIST_DATA_LOCATION + "t10k-labels.idx1-ubyte"
     test_labels = idx2numpy.convert_from_file(test_label_file)
     test_one_hot_labels = int_to_one_hot(test_labels)
 

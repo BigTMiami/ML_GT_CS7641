@@ -4,11 +4,12 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.preprocessing import MinMaxScaler
 import numpy as np
 
+CENSUS_DATA_LOCATION = "Assignment_1/data/census/"
 
 def get_column_names():
     column_names = []
     columns_to_encode = []
-    with open("Assignment_1/data/census/column_names.txt") as f:
+    with open(CENSUS_DATA_LOCATION + "column_names.txt") as f:
         line = f.readline()
         while line != "":
             start = line.find("(") + 1
@@ -59,7 +60,7 @@ def create_data_and_label_dataframes(df, encode_columns, le):
 def get_census_data_and_labels(scale_numeric):
     column_names, columns_to_encode = get_column_names()
 
-    survey_train_csv = "Assignment_1/data/census/census-income.data"
+    survey_train_csv = CENSUS_DATA_LOCATION + "census-income.data"
     df_train = pd.read_csv(survey_train_csv, names=column_names, index_col=False)
 
     encode_columns = []
@@ -79,7 +80,7 @@ def get_census_data_and_labels(scale_numeric):
         scaler.fit(np_train_data_numeric)
         np_train_data_numeric = scaler.transform(np_train_data_numeric)
 
-    survey_test_csv = "Assignment_1/data/census/census-income.test"
+    survey_test_csv = CENSUS_DATA_LOCATION + "census-income.test"
     df_test = pd.read_csv(survey_test_csv, names=column_names, index_col=False)
     df_test_data, df_test_label, np_test_data_numeric, np_test_label_numeric = create_data_and_label_dataframes(
         df_test, encode_columns, le
@@ -105,7 +106,7 @@ def get_census_data_and_labels_one_hot():
     column_names, columns_to_encode = get_column_names()
     columns_to_encode.remove("label")
 
-    survey_train_csv = "Assignment_1/data/census/census-income.data"
+    survey_train_csv = CENSUS_DATA_LOCATION + "census-income.data"
     df_train = pd.read_csv(survey_train_csv, names=column_names, index_col=False)
     df_train_one_hot = pd.get_dummies(df_train.drop(columns=["instance weight", "label"]), columns=columns_to_encode)
     np_train_one_hot = df_train_one_hot.to_numpy()
@@ -116,7 +117,7 @@ def get_census_data_and_labels_one_hot():
     df_train_label["label"] = np.where(df_train_label == " - 50000.", 0, 1)
     np_train_label = df_train_label.to_numpy()
 
-    survey_test_csv = "Assignment_1/data/census/census-income.test"
+    survey_test_csv = CENSUS_DATA_LOCATION + "census-income.test"
     df_test = pd.read_csv(survey_test_csv, names=column_names, index_col=False)
     df_test_one_hot = pd.get_dummies(df_test.drop(columns=["instance weight", "label"]), columns=columns_to_encode)
     df_test_one_hot = df_test_one_hot.reindex(columns=df_train_one_hot.columns, fill_value=0)
