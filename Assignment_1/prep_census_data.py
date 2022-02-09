@@ -9,7 +9,7 @@ CENSUS_DATA_LOCATION = "Assignment_1/data/census/"
 def get_column_names():
     column_names = []
     columns_to_encode = []
-    with open(CENSUS_DATA_LOCATION + "column_names.txt") as f:
+    with open("Assignment_1/column_names.txt") as f:
         line = f.readline()
         while line != "":
             start = line.find("(") + 1
@@ -57,7 +57,7 @@ def create_data_and_label_dataframes(df, encode_columns, le):
     return df_data, df_label, np_data_numeric, np_label_numeric
 
 
-def get_census_data_and_labels(scale_numeric):
+def get_census_data_and_labels(scale_numeric, CENSUS_DATA_LOCATION=CENSUS_DATA_LOCATION):
     column_names, columns_to_encode = get_column_names()
 
     survey_train_csv = CENSUS_DATA_LOCATION + "census-income.data"

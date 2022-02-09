@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.4.7)  8 FEB 2022 09:07
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.4.7)  9 FEB 2022 08:35
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -235,7 +235,9 @@ File: figures/MNIST_Images_decision_tree.png Graphic file (type png)
 Package pdftex.def Info: figures/MNIST_Images_decision_tree.png  used on input 
 line 164.
 (pdftex.def)             Requested size: 198.7425pt x 379.60172pt.
-<figures/MNIST_Images_decision_tree_cross_validation.png, id=14, 274.626pt x 18
+ [2 <./figures/Census_Data_decision_tree.png> <./figures/MNIST_Images_decision_
+tree.png>]
+<figures/MNIST_Images_decision_tree_cross_validation.png, id=19, 274.626pt x 18
 2.8431pt>
 File: figures/MNIST_Images_decision_tree_cross_validation.png Graphic file (typ
 e png)
@@ -243,12 +245,6 @@ e png)
 Package pdftex.def Info: figures/MNIST_Images_decision_tree_cross_validation.pn
 g  used on input line 173.
 (pdftex.def)             Requested size: 198.7425pt x 132.31929pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[2 <./figures/Census_Data_decision_tree.png> <./figures/MNIST_Images_decision_t
-ree.png>]
 <figures/Census_Data_Neural_Network_Error_Rates_by_Layer_Size__Learning_Rate_ce
 nsus.png, id=20, 293.4162pt x 357.7365pt>
 File: figures/Census_Data_Neural_Network_Error_Rates_by_Layer_Size__Learning_Ra
@@ -306,41 +302,34 @@ t line 230.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
+[4 <./figures/Census_Data_Neural_Network_Error_Rates_by_Layer_Size__Learning_Ra
+te_census_v2.png> <./figures/MNIST_Images_Neural_Network_Error_MNIST.png>]
 <figures/Census_Data_Boosting_Estimator_Count_by_Max_Depth_boosting_1.png, id=3
-1, 302.0886pt x 357.7365pt>
+6, 302.0886pt x 357.7365pt>
 File: figures/Census_Data_Boosting_Estimator_Count_by_Max_Depth_boosting_1.png 
 Graphic file (type png)
 <use figures/Census_Data_Boosting_Estimator_Count_by_Max_Depth_boosting_1.png>
 Package pdftex.def Info: figures/Census_Data_Boosting_Estimator_Count_by_Max_De
 pth_boosting_1.png  used on input line 243.
-(pdftex.def)             Requested size: 180.67836pt x 180.67459pt.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
+(pdftex.def)             Requested size: 180.67836pt x 162.6066pt.
 <figures/Census_Data_Boosting_Estimator_Count_by_Max_Depth_boosting_2.png, id=3
-2, 310.0383pt x 357.7365pt>
+7, 310.0383pt x 357.7365pt>
 File: figures/Census_Data_Boosting_Estimator_Count_by_Max_Depth_boosting_2.png 
 Graphic file (type png)
 <use figures/Census_Data_Boosting_Estimator_Count_by_Max_Depth_boosting_2.png>
 Package pdftex.def Info: figures/Census_Data_Boosting_Estimator_Count_by_Max_De
 pth_boosting_2.png  used on input line 250.
-(pdftex.def)             Requested size: 180.6786pt x 180.67459pt.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
+(pdftex.def)             Requested size: 180.6786pt x 162.6066pt.
 <figures/Census_Data_Boosting_Estimator_Count_by_Max_Depth_boosting_3.png, id=3
-3, 312.9291pt x 357.7365pt>
+8, 312.9291pt x 357.7365pt>
 File: figures/Census_Data_Boosting_Estimator_Count_by_Max_Depth_boosting_3.png 
 Graphic file (type png)
 <use figures/Census_Data_Boosting_Estimator_Count_by_Max_Depth_boosting_3.png>
 Package pdftex.def Info: figures/Census_Data_Boosting_Estimator_Count_by_Max_De
 pth_boosting_3.png  used on input line 257.
-(pdftex.def)             Requested size: 180.6777pt x 180.67459pt.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
+(pdftex.def)             Requested size: 180.6777pt x 162.6066pt.
 <figures/Census_Data_Boosting_Estimator_Count_by_Max_Depth_boosting_4.png, id=3
-4, 315.8199pt x 357.7365pt>
+9, 315.8199pt x 357.7365pt>
 File: figures/Census_Data_Boosting_Estimator_Count_by_Max_Depth_boosting_4.png 
 Graphic file (type png)
 <use figures/Census_Data_Boosting_Estimator_Count_by_Max_Depth_boosting_4.png>
@@ -348,175 +337,136 @@ Package pdftex.def Info: figures/Census_Data_Boosting_Estimator_Count_by_Max_De
 pth_boosting_4.png  used on input line 264.
 (pdftex.def)             Requested size: 180.67459pt x 162.6066pt.
 
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [4 <./figures/Census_Data_Neural_Network_Error_Rates_by_Layer_Size__Learning_R
-ate_census_v2.png> <./figures/MNIST_Images_Neural_Network_Error_MNIST.png>]
-<figures/MNIST_Boosted_Ensemble_boosting_1.png, id=40, 295.5843pt x 357.7365pt>
+[5 <./figures/MNIST_Images_CNN_Error_MNIST.png> <./figures/Census_Data_Boosting
+_Estimator_Count_by_Max_Depth_boosting_1.png> <./figures/Census_Data_Boosting_E
+stimator_Count_by_Max_Depth_boosting_2.png> <./figures/Census_Data_Boosting_Est
+imator_Count_by_Max_Depth_boosting_3.png>]
+<figures/MNIST_Boosted_Ensemble_boosting_1.png, id=47, 295.5843pt x 357.7365pt>
 
 File: figures/MNIST_Boosted_Ensemble_boosting_1.png Graphic file (type png)
 <use figures/MNIST_Boosted_Ensemble_boosting_1.png>
 Package pdftex.def Info: figures/MNIST_Boosted_Ensemble_boosting_1.png  used on
- input line 281.
+ input line 283.
 (pdftex.def)             Requested size: 180.676pt x 162.6066pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<figures/MNIST_Boosted_Ensemble_boosting_2.png, id=41, 290.5254pt x 357.0138pt>
+<figures/MNIST_Boosted_Ensemble_boosting_2.png, id=48, 290.5254pt x 357.0138pt>
 
 File: figures/MNIST_Boosted_Ensemble_boosting_2.png Graphic file (type png)
 <use figures/MNIST_Boosted_Ensemble_boosting_2.png>
 Package pdftex.def Info: figures/MNIST_Boosted_Ensemble_boosting_2.png  used on
- input line 292.
+ input line 294.
 (pdftex.def)             Requested size: 180.67801pt x 162.6104pt.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<figures/MNIST_Boosted_Ensemble_boosting_3.png, id=42, 290.5254pt x 357.0138pt>
+<figures/MNIST_Boosted_Ensemble_boosting_3.png, id=49, 290.5254pt x 357.0138pt>
 
 File: figures/MNIST_Boosted_Ensemble_boosting_3.png Graphic file (type png)
 <use figures/MNIST_Boosted_Ensemble_boosting_3.png>
 Package pdftex.def Info: figures/MNIST_Boosted_Ensemble_boosting_3.png  used on
- input line 301.
+ input line 303.
 (pdftex.def)             Requested size: 162.60889pt x 180.68004pt.
 
-LaTeX Warning: `h' float specifier changed to `ht'.
+Underfull \vbox (badness 1590) has occurred while \output is active []
 
-<figures/Census_Data_SVM_svm_1.png, id=43, 281.853pt x 357.7365pt>
+ [6 <./figures/Census_Data_Boosting_Estimator_Count_by_Max_Depth_boosting_4.png
+> <./figures/MNIST_Boosted_Ensemble_boosting_1.png> <./figures/MNIST_Boosted_En
+semble_boosting_2.png> <./figures/MNIST_Boosted_Ensemble_boosting_3.png>]
+<figures/Census_Data_SVM_svm_1.png, id=57, 281.853pt x 357.7365pt>
 File: figures/Census_Data_SVM_svm_1.png Graphic file (type png)
 <use figures/Census_Data_SVM_svm_1.png>
 Package pdftex.def Info: figures/Census_Data_SVM_svm_1.png  used on input line 
-315.
+317.
 (pdftex.def)             Requested size: 180.67775pt x 180.67459pt.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<figures/MNIST_Image_Data_SVM_svm_1.png, id=44, 281.853pt x 357.7365pt>
+<figures/MNIST_Image_Data_SVM_svm_1.png, id=58, 281.853pt x 357.7365pt>
 File: figures/MNIST_Image_Data_SVM_svm_1.png Graphic file (type png)
 <use figures/MNIST_Image_Data_SVM_svm_1.png>
 Package pdftex.def Info: figures/MNIST_Image_Data_SVM_svm_1.png  used on input 
-line 322.
+line 324.
 (pdftex.def)             Requested size: 180.67775pt x 180.67459pt.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[5 <./figures/MNIST_Images_CNN_Error_MNIST.png> <./figures/Census_Data_Boosting
-_Estimator_Count_by_Max_Depth_boosting_1.png>]
-<figures/Census_Data_KNN_knn_1.png, id=50, 308.5929pt x 357.0138pt>
+<figures/Census_Data_KNN_knn_1.png, id=59, 308.5929pt x 357.0138pt>
 File: figures/Census_Data_KNN_knn_1.png Graphic file (type png)
 <use figures/Census_Data_KNN_knn_1.png>
 Package pdftex.def Info: figures/Census_Data_KNN_knn_1.png  used on input line 
-336.
+338.
 (pdftex.def)             Requested size: 180.67914pt x 180.68004pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<figures/Census_Data_KNN_knn_2.png, id=51, 315.0972pt x 357.0138pt>
+<figures/Census_Data_KNN_knn_2.png, id=60, 315.0972pt x 357.0138pt>
 File: figures/Census_Data_KNN_knn_2.png Graphic file (type png)
 <use figures/Census_Data_KNN_knn_2.png>
 Package pdftex.def Info: figures/Census_Data_KNN_knn_2.png  used on input line 
-345.
+347.
 (pdftex.def)             Requested size: 180.67464pt x 180.68004pt.
+
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figures/MNIST_Images_KNN_knn_1.png, id=52, 308.5929pt x 357.0138pt>
+[7 <./figures/Census_Data_SVM_svm_1.png> <./figures/MNIST_Image_Data_SVM_svm_1.
+png> <./figures/Census_Data_KNN_knn_1.png>]
+<figures/MNIST_Images_KNN_knn_1.png, id=68, 308.5929pt x 357.0138pt>
 File: figures/MNIST_Images_KNN_knn_1.png Graphic file (type png)
 <use figures/MNIST_Images_KNN_knn_1.png>
 Package pdftex.def Info: figures/MNIST_Images_KNN_knn_1.png  used on input line
- 356.
+ 358.
 (pdftex.def)             Requested size: 180.67914pt x 180.68004pt.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[6 <./figures/Census_Data_Boosting_Estimator_Count_by_Max_Depth_boosting_2.png>
- <./figures/Census_Data_Boosting_Estimator_Count_by_Max_Depth_boosting_3.png> <
-./figures/Census_Data_Boosting_Estimator_Count_by_Max_Depth_boosting_4.png>]
-Underfull \vbox (badness 1661) has occurred while \output is active []
-
-<figures/Overall_Algorithm_ReviewComparison_of_Accuracy_.png, id=59, 455.301pt 
+<figures/Overall_Algorithm_ReviewComparison_of_Accuracy_.png, id=69, 455.301pt 
 x 343.2825pt>
 File: figures/Overall_Algorithm_ReviewComparison_of_Accuracy_.png Graphic file 
 (type png)
 <use figures/Overall_Algorithm_ReviewComparison_of_Accuracy_.png>
 Package pdftex.def Info: figures/Overall_Algorithm_ReviewComparison_of_Accuracy
-_.png  used on input line 369.
+_.png  used on input line 371.
 (pdftex.def)             Requested size: 180.67212pt x 180.67123pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[7 <./figures/MNIST_Boosted_Ensemble_boosting_1.png> <./figures/MNIST_Boosted_E
-nsemble_boosting_2.png> <./figures/MNIST_Boosted_Ensemble_boosting_3.png> <./fi
-gures/Census_Data_SVM_svm_1.png>]
-<figures/Overall_Algorithm_ReviewComparison_of_Learning_Time_.png, id=68, 454.5
+ [8 <./figures/Census_Data_KNN_knn_2.png> <./figures/MNIST_Images_KNN_knn_1.png
+> <./figures/Overall_Algorithm_ReviewComparison_of_Accuracy_.png>]
+<figures/Overall_Algorithm_ReviewComparison_of_Learning_Time_.png, id=76, 454.5
 783pt x 343.2825pt>
 File: figures/Overall_Algorithm_ReviewComparison_of_Learning_Time_.png Graphic 
 file (type png)
 <use figures/Overall_Algorithm_ReviewComparison_of_Learning_Time_.png>
 Package pdftex.def Info: figures/Overall_Algorithm_ReviewComparison_of_Learning
-_Time_.png  used on input line 384.
+_Time_.png  used on input line 386.
 (pdftex.def)             Requested size: 180.67667pt x 180.67123pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<figures/Overall_Algorithm_ReviewComparison_of_Prediction_Time_.png, id=69, 454
+<figures/Overall_Algorithm_ReviewComparison_of_Prediction_Time_.png, id=77, 454
 .5783pt x 343.2825pt>
 File: figures/Overall_Algorithm_ReviewComparison_of_Prediction_Time_.png Graphi
 c file (type png)
 <use figures/Overall_Algorithm_ReviewComparison_of_Prediction_Time_.png>
 Package pdftex.def Info: figures/Overall_Algorithm_ReviewComparison_of_Predicti
-on_Time_.png  used on input line 393.
+on_Time_.png  used on input line 395.
 (pdftex.def)             Requested size: 180.67667pt x 180.67123pt.
 
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-Underfull \hbox (badness 7203) in paragraph at lines 407--409
+Underfull \hbox (badness 7203) in paragraph at lines 409--411
 []\OT1/ptm/m/n/10 Census In-come (KDD). url: https://archive-
  []
 
 
-Overfull \hbox (55.7139pt too wide) in paragraph at lines 411--413
+Overfull \hbox (55.7139pt too wide) in paragraph at lines 413--415
 \OT1/ptm/m/n/10 https://pytorch.org/tutorials/beginner/blitz/cifar10[]tutorial.
 html.| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 413--414
+Underfull \hbox (badness 10000) in paragraph at lines 415--416
 []\OT1/ptm/m/n/10 Analysis Code used in this pa-per. url:
  []
 
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 3049) has occurred while \output is active []
 
- [8 <./figures/MNIST_Image_Data_SVM_svm_1.png> <./figures/Census_Data_KNN_knn_1
-.png>]
-[9 <./figures/Census_Data_KNN_knn_2.png> <./figures/MNIST_Images_KNN_knn_1.png>
- <./figures/Overall_Algorithm_ReviewComparison_of_Accuracy_.png>] [10
+ [9 <./figures/Overall_Algorithm_ReviewComparison_of_Learning_Time_.png> <./fig
+ures/Overall_Algorithm_ReviewComparison_of_Prediction_Time_.png>] [10
 
- <./figures/Overall_Algorithm_ReviewComparison_of_Learning_Time_.png> <./figure
-s/Overall_Algorithm_ReviewComparison_of_Prediction_Time_.png>]
+]
 (./amenninger3-analysis.aux) ) 
 Here is how much of TeX's memory you used:
  3550 strings out of 480608
  59536 string characters out of 5903631
- 302124 words of memory out of 5000000
+ 299124 words of memory out of 5000000
  19408 multiletter control sequences out of 15000+600000
  542168 words of font info for 39 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,12n,42p,1317b,288s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 41i,12n,42p,1364b,288s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2020/texmf-dist/fonts/enc/dvi
 ps/base/8r.enc}</usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/
 cm/cmmi10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/urw/times/utmb8a.
 pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/urw/times/utmr8a.pfb>
-Output written on amenninger3-analysis.pdf (10 pages, 727306 bytes).
+Output written on amenninger3-analysis.pdf (10 pages, 728012 bytes).
 PDF statistics:
  99 PDF objects out of 1000 (max. 8388607)
  35 compressed objects within 1 object stream

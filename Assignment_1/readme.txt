@@ -7,7 +7,7 @@ Infrastructure Setup
 * CODE: https://github.com/BigTMiami/ML_GT_CS7641
     * To download, run: git clone https://github.com/BigTMiami/ML_GT_CS7641.git
     * The code for this is in the Assignment_1 folder
-* DATA:Due to the size, the data was not loaded to Git, but can be pulled directly from the follwing urls
+* DATA:Due to the size, the data was not loaded to Git, but can be pulled directly from the following urls
     * Census data: https://archive-beta.ics.uci.edu/ml/datasets/census+income+kdd
         * This should be loaded into Assignment_1/data/census
     * MNIST data: http://yann.lecun.com/exdb/mnist/
